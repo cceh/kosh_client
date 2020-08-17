@@ -1,0 +1,31 @@
+
+/* APP FONTS */
+
+@font-face {
+    font-family: 'Gentium';
+    src: local('GentiumPlus-R'), url(fonts/GentiumPlus/GentiumPlus-R.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Gentium-I';
+    src: local('GentiumPlus-I'), url(fonts/GentiumPlus/GentiumPlus-I.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Assistant';
+    src: local('Assistant'), url(fonts/Assistant/Assistant-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NotoDeva';
+    src: local('NotoDeva'), url(fonts/NotoSerifDevanagari/NotoSerifDevanagari.ttf) format('truetype');
+}
+
+
+
+/* GLOBAL STYLING */
+
+body {
+    overflow-y: scroll;
+    background-color: #fff;
+}
