@@ -12,9 +12,9 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
         stateStore.dict_collection.collection_id = "freedict";
-        stateStore.dict_collection.dict_id = "afr_deu";
+        stateStore.dict_collection.dict_id = "eng_lat";
         stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
-        stateStore.search.field = "id";
+        stateStore.search.field = "headword";
         stateStore.search.query_type = "prefix"
 
     }
@@ -120,17 +120,21 @@ class NavBar extends React.Component {
                             <Navbar.Collapse id="basic-navbar-nav">
 
 
-                                <CustomSelect list={stateStore.collection_ids} onc={this.setDictIds}
-                                              label={"Collection: "}/>
+                                <CustomSelect
+                                    list={stateStore.collection_ids} onc={this.setDictIds}
+                                    label={"Collection: "} preselected={stateStore.dict_collection.collection_id}/>
 
-                                <CustomSelect list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                                              label={"Dictionary: "}/>
+                                <CustomSelect
+                                    list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
+                                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
 
-                                <CustomSelect list={stateStore.dict_spec.fields} onc={this.setField}
-                                              label={"Field: "}/>
+                                <CustomSelect list={stateStore.dict_spec.fields}
+                                              onc={this.setField}
+                                              label={"Field: "} preselected={stateStore.search.field}/>
 
-                                <CustomSelect list={stateStore.search.query_types} onc={this.setQueryType}
-                                              label={"Query Type: "}/>
+                                <CustomSelect
+                                    list={stateStore.search.query_types} onc={this.setQueryType}
+                                    label={"Query Type: "} preselected={stateStore.search.query_type}/>
 
 
                                 <Form onSubmit={(e) => {
