@@ -42,7 +42,9 @@ const stateStore = store({
         entries: null,
         loading: false,
         value: "",
-        field: ""
+        field: "",
+        query_types: [],
+        query_type: ""
     },
 
     dict_collection: {

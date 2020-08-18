@@ -14,7 +14,8 @@ class NavBar extends React.Component {
         stateStore.dict_collection.collection_id = "freedict";
         stateStore.dict_collection.dict_id = "afr_deu";
         stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
-        stateStore.search.field = "id"
+        stateStore.search.field = "id";
+        stateStore.search.query_type = "prefix"
 
     }
 
@@ -29,6 +30,7 @@ class NavBar extends React.Component {
         axios.get(url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.dict_spec.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum']
+            stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum']
         });
 
     }
@@ -37,7 +39,7 @@ class NavBar extends React.Component {
     search = async val => {
         stateStore.search.loading = true;
         const results = await search(
-            `https://kosh.uni-koeln.de/` + stateStore.dict_collection.collection_id + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query=${val}&query_type=prefix`
+            `https://kosh.uni-koeln.de/` + stateStore.dict_collection.collection_id + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query=${val}&query_type=` + stateStore.search.query_type
             )
         ;
         const entries = results;
@@ -87,6 +89,11 @@ class NavBar extends React.Component {
         console.log(stateStore.search.field)
     }
 
+    setQueryType = e => {
+        stateStore.search.query_type = e.target.value
+        console.log(stateStore.search.field)
+    }
+
     onChangeHandler = e => {
         this.search(e.target.value);
         stateStore.search.value = e.target.value;
@@ -117,10 +124,14 @@ class NavBar extends React.Component {
                                               label={"Collection: "}/>
 
                                 <CustomSelect list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                                              label={"Dictionaries: "}/>
+                                              label={"Dictionary: "}/>
 
                                 <CustomSelect list={stateStore.dict_spec.fields} onc={this.setField}
                                               label={"Field: "}/>
+
+                                <CustomSelect list={stateStore.search.query_types} onc={this.setQueryType}
+                                              label={"Query Type: "}/>
+
 
                                 <Form onSubmit={(e) => {
                                     e.preventDefault();
