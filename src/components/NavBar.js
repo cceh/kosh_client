@@ -30,6 +30,12 @@ class NavBar extends React.Component {
         axios.get(url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.dict_spec.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum']
+            var created = stateStore.dict_spec.fields.indexOf('created');
+            stateStore.dict_spec.fields.splice(created, 1);
+            var xml = stateStore.dict_spec.fields.indexOf('xml');
+            stateStore.dict_spec.fields.splice(xml, 1);
+            var id = stateStore.dict_spec.fields.indexOf('id');
+            stateStore.dict_spec.fields.splice(id, 1);
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum']
         });
 
@@ -50,7 +56,10 @@ class NavBar extends React.Component {
 
 
     setDictIds = async e => {
+        console.log(e.target.value)
         switch (e.target.value) {
+
+
             case "Freedict":
                 stateStore.dict_collection.collection_id = "freedict";
                 stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
@@ -118,11 +127,9 @@ class NavBar extends React.Component {
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                             <Navbar.Collapse id="basic-navbar-nav">
-
-
                                 <CustomSelect
                                     list={stateStore.collection_ids} onc={this.setDictIds}
-                                    label={"Collection: "} preselected={stateStore.dict_collection.collection_id}/>
+                                    label={"Collection: "}/>
 
                                 <CustomSelect
                                     list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
@@ -145,7 +152,6 @@ class NavBar extends React.Component {
                                                  placeholder="Search for ..." className="mr-sm-2"/>
                                     <Button variant="outline-success">Search</Button>
                                 </Form>
-
                             </Navbar.Collapse>
                         </Navbar>
                         <br/>
