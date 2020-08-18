@@ -63,12 +63,14 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.collection_id = "freedict";
                 stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
                 stateStore.dict_collection.dict_id = "afr_deu";
+                stateStore.search.field = "headword";
                 this.setSpec()
                 break;
             case "CDSD":
                 stateStore.dict_collection.collection_id = "cdsd";
                 stateStore.dict_collection.dict_ids = stateStore.cdsd_ids;
                 stateStore.dict_collection.dict_id = "ap90";
+                stateStore.search.field = "headword";
                 this.setSpec()
                 break;
             case "Kosh Data":
