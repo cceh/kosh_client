@@ -50,8 +50,7 @@ const stateStore = store({
     dict_collection: {
         collection_id: "",
         dict_ids: [],
-        dict_id: "",
-
+        dict_id: ""
     },
 
     dict_spec: {
