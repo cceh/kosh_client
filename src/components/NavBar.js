@@ -36,7 +36,11 @@ class NavBar extends React.Component {
             var id = stateStore.dict_spec.fields.indexOf('id');
             stateStore.dict_spec.fields.splice(id, 1);
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum']
-        });
+            console.log('Everything is awesome.');
+        }).catch((error) => {
+            console.warn('Not good man :(');
+        })
+
 
     }
 
@@ -64,6 +68,7 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
                 stateStore.dict_collection.dict_id = "afr_deu";
                 stateStore.search.field = "headword";
+                stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
             case "CDSD":
@@ -71,6 +76,7 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.dict_ids = stateStore.cdsd_ids;
                 stateStore.dict_collection.dict_id = "ap90";
                 stateStore.search.field = "headword";
+                 stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
             case "Kosh Data":
@@ -78,6 +84,7 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.dict_ids = stateStore.kosh_data_ids;
                 stateStore.dict_collection.dict_id = "de_alcedo";
                 stateStore.search.field = "lemma";
+                stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
             default:
