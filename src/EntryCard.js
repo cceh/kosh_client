@@ -1,22 +1,30 @@
 import React from "react";
-import Card from 'react-bootstrap/Card';
+import {Card, Badge} from 'react-bootstrap';
 import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
 
 
 const EntryCard = props => {
-    //const {headword} = props.item;
-    //const {translation} = props.item;
-    console.log(props)
 
 
-    var row = Object.keys(props.item).map(function (key) {
+    delete props.item.created;
+    delete props.item.xml;
+    delete props.item.id;
+
+
+    var row = Object.keys(props.item).map(key => {
 
         if (Array.isArray(props.item[key])) {
-            return <Card.Text><p>{key}</p> {props.item[key].map(r => (<li>{r}</li>))}</Card.Text>;
+            return <div key={key}>
+                <Badge variant="primary">{key}:</Badge>
+                <div>
+                    {props.item[key].map(r => (<li key={r}>{r}</li>))}</div>
+            </div>;
         } else {
-            return <Card.Text>{key}: {props.item[key]}
-            </Card.Text>
+            return <div key={key}>
+                <Badge variant="primary">{key}:</Badge>
+                <div>{props.item[key]}</div>
+            </div>
         }
 
     });
