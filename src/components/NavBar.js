@@ -19,7 +19,6 @@ class NavBar extends React.Component {
 
     }
 
-
     componentDidMount() {
         this.setSpec()
     }
@@ -76,6 +75,7 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.collection_id = "api";
                 stateStore.dict_collection.dict_ids = stateStore.kosh_data_ids;
                 stateStore.dict_collection.dict_id = "de_alcedo";
+                stateStore.search.field = "lemma";
                 this.setSpec()
                 break;
             default:
