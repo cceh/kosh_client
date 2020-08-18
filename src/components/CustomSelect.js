@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {view} from "react-easy-state";
 
 
-const CustomSelect = ({list, onc, label}) => {
+const CustomSelect = ({list, onc, label, preselected}) => {
     if (!list.length) {
         return null;
     }
@@ -12,7 +12,7 @@ const CustomSelect = ({list, onc, label}) => {
         <Form inline>
             <Form.Group controlId="exampleForm.SelectCustom">
                 <Form.Label>{label}</Form.Label>
-                <Form.Control as="select" onChange={v => onc(v)} custom>
+                <Form.Control value={preselected} as="select" onChange={v => onc(v)} custom>
                     {list.map(v => (
                         <option
                             key={'quick_field_' + v}
