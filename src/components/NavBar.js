@@ -29,21 +29,11 @@ class NavBar extends React.Component {
         axios.get(url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.dict_spec.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum']
-            var created = stateStore.dict_spec.fields.indexOf('created');
-            stateStore.dict_spec.fields.splice(created, 1);
-            var xml = stateStore.dict_spec.fields.indexOf('xml');
-            stateStore.dict_spec.fields.splice(xml, 1);
-            var id = stateStore.dict_spec.fields.indexOf('id');
-            stateStore.dict_spec.fields.splice(id, 1);
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum']
-            console.log('Everything is awesome.');
         }).catch((error) => {
-            console.warn('Not good man :(');
+            console.warn('error fetching spec');
         })
-
-
     }
-
 
     search = async val => {
         stateStore.search.loading = true;
@@ -61,8 +51,6 @@ class NavBar extends React.Component {
     setDictIds = async e => {
         console.log(e.target.value)
         switch (e.target.value) {
-
-
             case "Freedict":
                 stateStore.dict_collection.collection_id = "freedict";
                 stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
@@ -76,7 +64,7 @@ class NavBar extends React.Component {
                 stateStore.dict_collection.dict_ids = stateStore.cdsd_ids;
                 stateStore.dict_collection.dict_id = "ap90";
                 stateStore.search.field = "headword";
-                 stateStore.search.query_type = "prefix";
+                stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
             case "Kosh Data":
