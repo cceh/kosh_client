@@ -3,7 +3,7 @@ import {store} from 'react-easy-state';
 
 const stateStore = store({
 
-    collection_ids: ["Freedict", "Kosh Data", "CDSD"],
+    collection_ids: ["Freedict", "Kosh Data", "CDSD", "C-SALT Sanskrit"],
 
     freedict_ids: [
         "afr_deu", "afr_eng", "ara_eng", "bre_fra", "ces_eng", "ckb_kmr", "cym_eng",
@@ -37,6 +37,7 @@ const stateStore = store({
         "mw", "pgn", "pui", "pe", "shs", "vei", "wil", "yat", "pwg", "pw", "ccs", "gra", "sch",
         "bur", "stc", "ae", "bor", "mwe", "bop", "krm", "skd", "vcp"],
 
+    c_salt_sanskrit_ids:["mw", "ap90", "bhs", "vei", "pwg", "gra", "ae"],
 
     search: {
         entries: null,
@@ -50,7 +51,7 @@ const stateStore = store({
     },
 
     dict_collection: {
-        collection_id: "",
+        base_path: "",
         dict_ids: [],
         dict_id: ""
     },
