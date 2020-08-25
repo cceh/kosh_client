@@ -5,10 +5,12 @@ import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
 
 
-const Entries = ({list}) => {
+const Entries = ({results}) => {
     let entries = <h3>Loading...</h3>;
-    if (list) {
-        entries = list.map((m, i) => <EntryCard key={i} item={m}/>);
+
+    if (results) {
+        entries = results.map((m, i) => <EntryCard key={i} item={m}/>);
+
     }
     return (
         <CardColumns>
