@@ -1,22 +1,24 @@
 import React from 'react'
-import {Navbar, Form, FormControl, Button} from 'react-bootstrap'
+import {Navbar} from 'react-bootstrap'
 import stateStore from '../stateStore'
-import {search} from "../utils";
 import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 
-class NavBar extends React.Component {
+class MainSearchSettings extends React.Component {
 
     constructor(props) {
         super(props);
+        this.default_setup()
+    }
+
+    default_setup() {
         stateStore.dict_collection.collection_id = "freedict";
         stateStore.dict_collection.dict_id = "eng_lat";
         stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
         stateStore.search.field = "headword";
         stateStore.search.query_type = "prefix"
-
     }
 
     componentDidMount() {
@@ -29,10 +31,8 @@ class NavBar extends React.Component {
         axios.get(url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.search.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum'];
-            // init if not already set up
-            if (stateStore.results.fields.length === 0) {
-                stateStore.results.fields = stateStore.search.fields;
-            }
+            // set default fields to be displayed
+            stateStore.results.display_fields = this.initFields(stateStore.search.fields)
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
         }).catch((error) => {
             console.warn('error fetching spec');
@@ -40,28 +40,21 @@ class NavBar extends React.Component {
 
     }
 
-    search = async val => {
-        stateStore.search.loading = true;
-        const results = await search(
-            `https://kosh.uni-koeln.de/` + stateStore.dict_collection.collection_id + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query=${val}&query_type=` + stateStore.search.query_type
-            )
-        ;
-        const entries = results;
-        stateStore.search.entries = entries;
-        stateStore.search.loading = false;
+    initFields(fields) {
+        var obj = {}
+        for (let i = 0; i < fields.length; ++i) {
+            obj[fields[i]] = true;
+        }
 
-    };
+        return obj
+    }
 
 
     setDictIds = async e => {
         console.log(e.target.value)
         switch (e.target.value) {
             case "Freedict":
-                stateStore.dict_collection.collection_id = "freedict";
-                stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
-                stateStore.dict_collection.dict_id = "afr_deu";
-                stateStore.search.field = "headword";
-                stateStore.search.query_type = "prefix";
+                this.default_setup()
                 this.setSpec()
                 break;
             case "CDSD":
@@ -81,7 +74,8 @@ class NavBar extends React.Component {
                 this.setSpec()
                 break;
             default:
-                stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
+                this.default_setup()
+                this.setSpec()
         }
 
         console.log(stateStore.dict_collection.dict_ids)
@@ -105,42 +99,27 @@ class NavBar extends React.Component {
         console.log(stateStore.search.field)
     }
 
-    onChangeHandler = e => {
-        this.search(e.target.value);
-        stateStore.search.value = e.target.value;
-    };
-
 
     render() {
         return (
-            <Navbar expand="lg" sticky="top" className=" bg-light justify-content-between">
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <CustomSelect
-                        list={stateStore.collection_ids} onc={this.setDictIds}
-                        label={"Collection: "}/>
+            <Navbar expand="lg" sticky="top" className="bg-light">
 
-                    <CustomSelect
-                        list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                        label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
+                <CustomSelect
+                    list={stateStore.collection_ids} onc={this.setDictIds}
+                    label={"Collection: "}/>
 
-                    <CustomSelect list={stateStore.search.fields}
-                                  onc={this.setField}
-                                  label={"Field: "} preselected={stateStore.search.field}/>
+                <CustomSelect
+                    list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
+                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
 
-                    <CustomSelect
-                        list={stateStore.search.query_types} onc={this.setQueryType}
-                        label={"Query Type: "} preselected={stateStore.search.query_type}/>
+                <CustomSelect list={stateStore.search.fields}
+                              onc={this.setField}
+                              label={"Field: "} preselected={stateStore.search.field}/>
 
-                </Navbar.Collapse>
-                <Form onSubmit={(e) => {
-                    e.preventDefault();
-                }} inline>
-                    <FormControl value={stateStore.search.value}
-                                 onChange={e => this.onChangeHandler(e)}
-                                 placeholder="Search for ..." className="mr-sm-2"/>
-                    <Button variant="outline-success">Search</Button>
-                </Form>
+                <CustomSelect
+                    list={stateStore.search.query_types} onc={this.setQueryType}
+                    label={"Query Type: "} preselected={stateStore.search.query_type}/>
+
 
             </Navbar>
         )
@@ -148,4 +127,4 @@ class NavBar extends React.Component {
 }
 
 
-export default withRouter(view(NavBar));
+export default withRouter(view(MainSearchSettings));

@@ -1,0 +1,76 @@
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Navbar from "react-bootstrap/Navbar";
+import MainSearchSettings from "./MainSearchSettings";
+import {Button, Form, FormControl} from "react-bootstrap";
+import stateStore from "../stateStore";
+import React from "react";
+import {search} from "../utils";
+import {withRouter} from "react-router-dom";
+import {view} from "react-easy-state";
+
+class SearchSettings extends React.Component {
+
+    onChangeHandler = e => {
+        this.search(e.target.value);
+        stateStore.search.value = e.target.value;
+    };
+
+    search = async val => {
+        stateStore.search.loading = true;
+        const results = await search(
+            `https://kosh.uni-koeln.de/` + stateStore.dict_collection.collection_id + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query=${val}&query_type=` + stateStore.search.query_type
+            )
+        ;
+        const entries = results;
+        stateStore.search.entries = entries;
+        stateStore.search.loading = false;
+
+    };
+
+    render() {
+        return (
+            <Container fluid>
+                <Row>
+                    <Col>
+
+                        <Navbar bg="light" variant="light" expand="lg" sticky="top">
+                            <Navbar.Brand href="https://kosh.uni-koeln.de">
+                                <img
+                                    src="/kosh.png"
+                                    width="30"
+                                    height="30"
+                                    className="d-inline-block align-top"
+                                    alt=""
+                                />
+                                {' '}Kosh - APIs for Lexical Data
+                            </Navbar.Brand></Navbar>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col><MainSearchSettings/></Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                        <Navbar bg="light" variant="light" expand="lg" sticky="top">
+                            <Form onSubmit={(e) => {
+                                e.preventDefault();
+                            }} inline>
+                                <FormControl value={stateStore.search.value}
+                                             onChange={e => this.onChangeHandler(e)}
+                                             placeholder="Search for ..." className="mr-sm-2"/>
+                                <Button variant="outline-success">Search</Button>
+                            </Form>
+                        </Navbar>
+                    </Col>
+                </Row>
+                <br/>
+            </Container>
+        );
+    }
+
+}
+
+export default withRouter(view(SearchSettings));
