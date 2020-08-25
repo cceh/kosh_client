@@ -28,11 +28,16 @@ class NavBar extends React.Component {
         console.log(url)
         axios.get(url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
-            stateStore.dict_spec.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum']
-            stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum']
+            stateStore.search.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum'];
+            // init if not already set up
+            if (stateStore.results.fields.length === 0) {
+                stateStore.results.fields = stateStore.search.fields;
+            }
+            stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
         }).catch((error) => {
             console.warn('error fetching spec');
         })
+
     }
 
     search = async val => {
@@ -87,7 +92,7 @@ class NavBar extends React.Component {
         stateStore.dict_collection.dict_id = e.target.value
         console.log(stateStore.dict_collection.dict_id)
         this.setSpec()
-        console.log(stateStore.dict_spec.fields)
+
     };
 
     setField = e => {
@@ -108,53 +113,36 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <Navbar bg="light" variant="light" expand="lg" sticky="top">
-                            <Navbar.Brand href="#home">
-                                <img
-                                    src="/kosh.png"
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top"
-                                    alt=""
-                                />
-                                Kosh
-                            </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <CustomSelect
-                                    list={stateStore.collection_ids} onc={this.setDictIds}
-                                    label={"Collection: "}/>
+            <Navbar expand="lg" sticky="top" className=" bg-light justify-content-between">
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <CustomSelect
+                        list={stateStore.collection_ids} onc={this.setDictIds}
+                        label={"Collection: "}/>
 
-                                <CustomSelect
-                                    list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
+                    <CustomSelect
+                        list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
+                        label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
 
-                                <CustomSelect list={stateStore.dict_spec.fields}
-                                              onc={this.setField}
-                                              label={"Field: "} preselected={stateStore.search.field}/>
+                    <CustomSelect list={stateStore.search.fields}
+                                  onc={this.setField}
+                                  label={"Field: "} preselected={stateStore.search.field}/>
 
-                                <CustomSelect
-                                    list={stateStore.search.query_types} onc={this.setQueryType}
-                                    label={"Query Type: "} preselected={stateStore.search.query_type}/>
+                    <CustomSelect
+                        list={stateStore.search.query_types} onc={this.setQueryType}
+                        label={"Query Type: "} preselected={stateStore.search.query_type}/>
 
+                </Navbar.Collapse>
+                <Form onSubmit={(e) => {
+                    e.preventDefault();
+                }} inline>
+                    <FormControl value={stateStore.search.value}
+                                 onChange={e => this.onChangeHandler(e)}
+                                 placeholder="Search for ..." className="mr-sm-2"/>
+                    <Button variant="outline-success">Search</Button>
+                </Form>
 
-                                <Form onSubmit={(e) => {
-                                    e.preventDefault();
-                                }} inline>
-                                    <FormControl value={stateStore.search.value}
-                                                 onChange={e => this.onChangeHandler(e)}
-                                                 placeholder="Search for ..." className="mr-sm-2"/>
-                                    <Button variant="outline-success">Search</Button>
-                                </Form>
-                            </Navbar.Collapse>
-                        </Navbar>
-                        <br/>
-                    </div>
-                </div>
-            </div>
+            </Navbar>
         )
     }
 }

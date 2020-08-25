@@ -43,8 +43,10 @@ const stateStore = store({
         loading: false,
         value: "",
         field: "",
+        fields: [],
         query_types: [],
-        query_type: ""
+        query_type: "",
+
     },
 
     dict_collection: {
@@ -54,7 +56,11 @@ const stateStore = store({
     },
 
     dict_spec: {
-        raw: null, fields: []
+        raw: null
+    },
+
+    results: {
+        display_fields: {}
     }
 
 
