@@ -2,31 +2,37 @@ import React from "react";
 import {Card, Badge} from 'react-bootstrap';
 import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
+import stateStore from "./stateStore";
 
 
 const EntryCard = props => {
 
 
-    delete props.item.created;
-    delete props.item.xml;
-    delete props.item.id;
+    var row = Object.keys(props.item).map(k => {
+
+        if (stateStore.results.display_fields[k] === true) {
+
+            if (Array.isArray(props.item[k])) {
 
 
-    var row = Object.keys(props.item).map(key => {
+                return <div key={k}>
+                    <Badge variant="primary">{k}:</Badge>
+                    <div>
+                        {props.item[k].map(r => (<li key={r}>{r}</li>))}</div>
+                </div>;
 
-        if (Array.isArray(props.item[key])) {
-            return <div key={key}>
-                <Badge variant="primary">{key}:</Badge>
-                <div>
-                    {props.item[key].map(r => (<li key={r}>{r}</li>))}</div>
-            </div>;
+            } else {
+
+                return <div key={k}>
+                    <Badge variant="primary">{k}:</Badge>
+                    <div>{props.item[k]}</div>
+                </div>
+
+            }
+
         } else {
-            return <div key={key}>
-                <Badge variant="primary">{key}:</Badge>
-                <div>{props.item[key]}</div>
-            </div>
+            return null;
         }
-
     });
 
     return (
