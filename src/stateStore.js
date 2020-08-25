@@ -37,7 +37,7 @@ const stateStore = store({
         "mw", "pgn", "pui", "pe", "shs", "vei", "wil", "yat", "pwg", "pw", "ccs", "gra", "sch",
         "bur", "stc", "ae", "bor", "mwe", "bop", "krm", "skd", "vcp"],
 
-    c_salt_sanskrit_ids:["mw", "ap90", "bhs", "vei", "pwg", "gra", "ae"],
+    c_salt_sanskrit_ids: ["mw", "ap90", "bhs", "vei", "pwg", "gra", "ae"],
 
     search: {
         entries: null,
@@ -47,6 +47,8 @@ const stateStore = store({
         fields: [],
         query_types: [],
         query_type: "",
+        query_size: 10,
+        query_sizes: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
     },
 

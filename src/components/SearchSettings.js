@@ -25,10 +25,9 @@ class SearchSettings extends React.Component {
         } else {
             base_url = 'https://kosh.uni-koeln.de/'
         }
-        const results = await search(
-            base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query=${val}&query_type=` + stateStore.search.query_type
-            )
-        ;
+        const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
+        console.log(q)
+        const results = await search(q);
         const entries = results;
         stateStore.search.entries = entries;
         stateStore.search.loading = false;

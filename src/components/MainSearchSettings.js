@@ -111,9 +111,13 @@ class MainSearchSettings extends React.Component {
 
     setQueryType = e => {
         stateStore.search.query_type = e.target.value
-        console.log(stateStore.search.field)
+        console.log(stateStore.search.query_type)
     }
 
+    setQuerySize = e => {
+        stateStore.search.query_size = e.target.value
+        console.log(stateStore.search.query_size)
+    }
 
     render() {
         return (
@@ -135,6 +139,9 @@ class MainSearchSettings extends React.Component {
                     list={stateStore.search.query_types} onc={this.setQueryType}
                     label={"Query Type: "} preselected={stateStore.search.query_type}/>
 
+                <CustomSelect
+                    list={stateStore.search.query_sizes} onc={this.setQuerySize}
+                    label={"Query Size: "} preselected={stateStore.search.query_size}/>
 
             </Navbar>
         )
