@@ -37,8 +37,12 @@ class MainSearchSettings extends React.Component {
         axios.get(spec_url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.search.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum'];
+             //remove created
+            stateStore.search.fields = stateStore.search.fields.filter(item => item !== 'created')
+            console.log(stateStore.search.fields)
             // set default fields to be displayed
             stateStore.results.display_fields = this.initFields(stateStore.search.fields)
+
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
         }).catch((error) => {
             console.warn('error fetching spec');
@@ -51,7 +55,6 @@ class MainSearchSettings extends React.Component {
         for (let i = 0; i < fields.length; ++i) {
             obj[fields[i]] = true;
         }
-
         return obj
     }
 
