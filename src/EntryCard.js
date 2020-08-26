@@ -3,13 +3,16 @@ import {Card, Badge} from 'react-bootstrap';
 import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
 import stateStore from "./stateStore";
+import beautify from 'xml-beautifier';
+import Highlight, {defaultProps} from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/github";
 
 
 const EntryCard = props => {
 
-
-    var row = Object.keys(props.item).map(k => {
-
+    let row = Object.keys(props.item).sort(function (a, b) {
+        return stateStore.search.fields.indexOf(a) - stateStore.search.fields.indexOf(b);
+    }).map(k => {
         if (stateStore.results.display_fields[k] === true) {
             if (Array.isArray(props.item[k])) {
                 return <div key={k}>
@@ -19,12 +22,28 @@ const EntryCard = props => {
                 </div>;
             } else {
                 if (k === "xml") {
-                    const format = require('xml-formatter');
-                    let xml = props.item[k];
-                    let formattedXml = format(xml);
+                    let xml = beautify(props.item[k]);
                     return <div key={k}>
                         <Badge variant="primary">{k}:</Badge>
-                        <pre>{formattedXml}</pre>
+                        <Highlight {...defaultProps} theme={theme} code={xml} language="xml">
+                            {({className, style, tokens, getLineProps, getTokenProps}) => (
+                                <pre className={className} style={style}>
+        {tokens.map((line, i) => (
+            <div {...getLineProps({line, key: i})}>
+                {line.map((token, key) => (
+                    <span {...getTokenProps({token, key})} />
+                ))}
+            </div>
+        ))}
+      </pre>
+                            )}
+                        </Highlight>
+                    </div>
+                } else if (k === "id") {
+                    let url = stateStore.dict_collection.dict_base_url + `/ids?ids=` + props.item[k];
+                    return <div key={k}>
+                        <Badge variant="primary">{k}:</Badge>
+                        <div><a href={url}>{props.item[k]}</a></div>
                     </div>
                 } else {
                     return <div key={k}>
