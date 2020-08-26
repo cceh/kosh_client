@@ -33,16 +33,16 @@ class MainSearchSettings extends React.Component {
             base_url = 'https://kosh.uni-koeln.de/'
         }
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
+        stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
         console.log(spec_url)
         axios.get(spec_url).then(resp => {
             stateStore.dict_spec.raw = resp.data;
             stateStore.search.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum'];
-             //remove created
+            //remove created
             stateStore.search.fields = stateStore.search.fields.filter(item => item !== 'created')
             console.log(stateStore.search.fields)
             // set default fields to be displayed
             stateStore.results.display_fields = this.initFields(stateStore.search.fields)
-
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
         }).catch((error) => {
             console.warn('error fetching spec');
@@ -74,7 +74,6 @@ class MainSearchSettings extends React.Component {
                 stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
-
             case "C-SALT Sanskrit":
                 stateStore.dict_collection.base_path = "dicts";
                 stateStore.dict_collection.dict_ids = stateStore.c_salt_sanskrit_ids;
@@ -95,10 +94,8 @@ class MainSearchSettings extends React.Component {
                 this.default_setup()
                 this.setSpec()
         }
-
         console.log(stateStore.dict_collection.dict_ids)
     };
-
 
     setDictId = e => {
         stateStore.dict_collection.dict_id = e.target.value

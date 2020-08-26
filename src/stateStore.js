@@ -55,7 +55,8 @@ const stateStore = store({
     dict_collection: {
         base_path: "",
         dict_ids: [],
-        dict_id: ""
+        dict_id: "",
+        dict_base_url: ""
     },
 
     dict_spec: {
