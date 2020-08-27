@@ -28,15 +28,10 @@ const EntryCard = props => {
                         <Highlight {...defaultProps} theme={theme} code={xml} language="xml">
                             {({className, style, tokens, getLineProps, getTokenProps}) => (
                                 <pre className={className} style={style}>
-        {tokens.map((line, i) => (
-            <div {...getLineProps({line, key: i})}>
-                {line.map((token, key) => (
-                    <span {...getTokenProps({token, key})} />
-                ))}
-            </div>
-        ))}
-      </pre>
-                            )}
+                                {tokens.map((line, i) => (
+                                <div {...getLineProps({line, key: i})}>{line.map((token, key) => (
+                                <span {...getTokenProps({token, key})} />))}
+                            </div>))}</pre>)}
                         </Highlight>
                     </div>
                 } else if (k === "id") {
