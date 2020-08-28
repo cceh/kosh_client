@@ -29,6 +29,7 @@ class SearchSettings extends React.Component {
         console.log(q)
         const results = await search(q);
         const entries = results;
+        stateStore.search.query = q
         stateStore.search.entries = entries;
         stateStore.search.loading = false;
 
@@ -39,15 +40,15 @@ class SearchSettings extends React.Component {
             <Container fluid>
                 <Row>
                     <Col>
-
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
-                            <Navbar.Brand href="https://kosh.uni-koeln.de">
+                            <Navbar.Brand href="https://kosh.uni-koeln.de" target="_blank" rel="noopener noreferrer">
                                 <img
                                     src="/kosh.png"
                                     width="30"
                                     height="30"
                                     className="d-inline-block align-top"
                                     alt=""
+
                                 />
                                 {' '}Kosh - APIs for Lexical Data
                             </Navbar.Brand></Navbar>
@@ -56,7 +57,6 @@ class SearchSettings extends React.Component {
                 <Row>
                     <Col><MainSearchSettings/></Col>
                 </Row>
-
                 <Row>
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
@@ -69,6 +69,16 @@ class SearchSettings extends React.Component {
                                 <Button variant="outline-success">Search</Button>
                             </Form>
                         </Navbar>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                        <Navbar bg="light" variant="light" expand="lg" sticky="top">
+                            <Navbar.Brand href="https://kosh.uni-koeln.de">Query: </Navbar.Brand>
+                            <h7><a target="_blank" rel="noopener noreferrer" href={stateStore.search.query}>{stateStore.search.query}</a></h7>
+                        </Navbar>
+
                     </Col>
                 </Row>
                 <br/>
