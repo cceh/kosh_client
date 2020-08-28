@@ -70,7 +70,7 @@ class SearchResults extends React.Component {
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
                             <Navbar.Brand>
-                                <h4>Search Results</h4>
+                                <h5>Search Results</h5>
                             </Navbar.Brand>
                         </Navbar>
                     </Col>
