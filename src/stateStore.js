@@ -45,6 +45,7 @@ const stateStore = store({
         value: "",
         field: "",
         fields: [],
+        query: '',
         query_types: [],
         query_type: "",
         query_size: 10,
@@ -58,6 +59,16 @@ const stateStore = store({
         dict_id: "",
         dict_base_url: ""
     },
+
+    view: {
+        table: true,
+        value: ''
+    },
+
+    views: [
+        {name: 'TableView', value: 'table'},
+        {name: 'CardView', value: 'card'},
+    ],
 
     dict_spec: {
         raw: null
