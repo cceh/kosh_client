@@ -2,7 +2,7 @@ import React from "react";
 import {Card, Badge} from 'react-bootstrap';
 import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
-import stateStore from "./stateStore";
+import stateStore from "../stateStore";
 import beautify from 'xml-beautifier';
 import Highlight, {defaultProps} from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/github";
@@ -53,7 +53,7 @@ const EntryCard = props => {
     });
 
     return (
-        <Card>
+        <Card className="card h-100">
             <Card.Body>
                 {row}
             </Card.Body>

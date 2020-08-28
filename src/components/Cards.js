@@ -5,7 +5,7 @@ import {view} from 'react-easy-state';
 import {withRouter} from 'react-router-dom';
 
 
-const Entries = ({results}) => {
+const Cards = ({results}) => {
     let entries = <h3>Loading...</h3>;
 
     if (results) {
@@ -20,4 +20,4 @@ const Entries = ({results}) => {
 };
 
 
-export default withRouter(view(Entries));
+export default withRouter(view(Cards));
