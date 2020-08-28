@@ -44,14 +44,14 @@ class SearchSettings extends React.Component {
                             <Navbar.Brand href="https://kosh.uni-koeln.de" target="_blank" rel="noopener noreferrer">
                                 <img
                                     src="/kosh.png"
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top"
+                                    width="60px"
+                                    height="60px"
                                     alt=""
 
                                 />
-                                {' '}Kosh - APIs for Lexical Data
-                            </Navbar.Brand></Navbar>
+                                {' '}  Kosh - APIs for Lexical Data
+                            </Navbar.Brand>
+                        </Navbar>
                     </Col>
                 </Row>
                 <Row>
@@ -76,7 +76,8 @@ class SearchSettings extends React.Component {
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
                             <Navbar.Brand href="https://kosh.uni-koeln.de">Query: </Navbar.Brand>
-                            <h7><a target="_blank" rel="noopener noreferrer" href={stateStore.search.query}>{stateStore.search.query}</a></h7>
+                            <h7><a target="_blank" rel="noopener noreferrer"
+                                   href={stateStore.search.query}>{stateStore.search.query}</a></h7>
                         </Navbar>
 
                     </Col>
