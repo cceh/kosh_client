@@ -12,10 +12,8 @@ const CustomCheckbox = ({labels, handleChange, isChecked}) => {
         <Form key="display_fields">
             {['checkbox'].map((type) => (
                 <div key={`inline-${type}`}>Display fields : {labels.map(v => (
-                    <Form.Check onChange={e => handleChange(e, v)}  defaultChecked={isChecked(v)} className="ml-1" inline
-                                label={v} type={type}
-                                id={`inline-${Math.random()}`} key={Math.random()}/>
-                ))}
+                    <Form.Check onChange={e => handleChange(e, v)} defaultChecked={isChecked(v)} className="ml-1" inline
+                                label={v} type={type} id={`inline-${Math.random()}`} key={Math.random()}/>))}
                 </div>
             ))}
         </Form>
