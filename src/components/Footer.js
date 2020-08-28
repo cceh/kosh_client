@@ -12,7 +12,7 @@ const Footer = () => {
                     <a href="https://uni-koeln.de" target="_blank" rel="noopener noreferrer">
                         <img
                             src="../logo_uzk_weiss.png"
-                            width="100px"
+                            width="70px"
                             className="d-inline-block align-top"
                             alt=""
                             target="_blank" rel="noopener noreferrer"/>
@@ -23,7 +23,7 @@ const Footer = () => {
                         <img
 
                             src="../logo_cceh_weiss.png"
-                            width="100px"
+                            width="70px"
                             className="d-inline-block align-top"
                             alt=""
                         />
