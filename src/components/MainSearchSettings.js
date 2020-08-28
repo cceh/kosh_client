@@ -122,27 +122,21 @@ class MainSearchSettings extends React.Component {
     render() {
         return (
             <Navbar expand="lg" sticky="top" className="bg-light">
-
                 <CustomSelect
                     list={stateStore.collection_ids} onc={this.setDictIds}
                     label={"Collection: "}/>
-
                 <CustomSelect
                     list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
                     label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
-
                 <CustomSelect list={stateStore.search.fields}
                               onc={this.setField}
                               label={"Field: "} preselected={stateStore.search.field}/>
-
                 <CustomSelect
                     list={stateStore.search.query_types} onc={this.setQueryType}
                     label={"Query Type: "} preselected={stateStore.search.query_type}/>
-
                 <CustomSelect
                     list={stateStore.search.query_sizes} onc={this.setQuerySize}
                     label={"Query Size: "} preselected={stateStore.search.query_size}/>
-
             </Navbar>
         )
     }
