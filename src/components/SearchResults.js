@@ -1,14 +1,12 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import {view} from "react-easy-state";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Navbar from "react-bootstrap/Navbar";
+import {Row, Col, Container, Navbar, Alert, Nav} from 'react-bootstrap';
 import CustomCheckbox from "./CustomCheckbox";
 import stateStore from "../stateStore";
-import Alert from "react-bootstrap/Alert";
-import Container from 'react-bootstrap/Container';
-import Entries from "../Entries";
+import Table from "./CustomTable";
+import ViewSettings from "./ViewSettings";
+import Cards from "./Cards";
 
 class SearchResults extends React.Component {
 
@@ -21,7 +19,21 @@ class SearchResults extends React.Component {
     }
 
 
-    handleChange(e, v) {
+    changeView = e => {
+
+        if (e === 'table') {
+            stateStore.view.table = true;
+            stateStore.view.value = 'table';
+        } else if (e === 'card') {
+            stateStore.view.table = false;
+            stateStore.view.value = 'card';
+        }
+        console.log(e)
+        console.log(stateStore.view.table)
+    }
+
+
+    handleChange = (e, v) => {
         stateStore.results.display_fields[v] = e.target.checked
         console.log(stateStore.results.display_fields)
     }
@@ -30,7 +42,6 @@ class SearchResults extends React.Component {
         return stateStore.results.display_fields.valueOf(v)
 
     }
-
 
     renderEntries() {
 
@@ -43,10 +54,12 @@ class SearchResults extends React.Component {
         }
 
         if (stateStore.search.entries) {
-            return <Entries results={stateStore.search.entries}/>;
+            if (stateStore.view.table === true) {
+                return <Table results={stateStore.search.entries}/>;
+            } else {
+                return <Cards results={stateStore.search.entries}/>;
+            }
         }
-
-
     }
 
 
@@ -54,17 +67,26 @@ class SearchResults extends React.Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col><Navbar bg="light" variant="light" expand="lg" sticky="top">
-                        <Navbar.Brand>
-                            Search Results
-                        </Navbar.Brand></Navbar>
+                    <Col>
+                        <Navbar bg="light" variant="light" expand="lg" sticky="top">
+                            <Navbar.Brand>
+                                <h4>Search Results</h4>
+                            </Navbar.Brand>
+                        </Navbar>
                     </Col>
                 </Row>
                 <Row>
+                </Row>
+                <Row>
                     <Col>
-                        <Navbar key="display_checkbox" sticky="top" expand="lg" bg="light">
+                        <Navbar key="display_results" sticky="top" expand="lg" bg="light">
                             <CustomCheckbox labels={stateStore.search.fields} isChecked={this.handleIsItChecked}
                                             handleChange={this.handleChange}/>
+
+                            <Nav className="ml-auto">
+                                <ViewSettings onc={this.changeView} />
+                            </Nav>
+
                         </Navbar>
                     </Col>
                 </Row>
