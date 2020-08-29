@@ -9,9 +9,7 @@ import theme from "prism-react-renderer/themes/github";
 
 const CustomRow = props => {
 
-    let row = Object.keys(props.item).sort(function (a, b) {
-        return stateStore.search.fields.indexOf(a) - stateStore.search.fields.indexOf(b);
-    }).map(k => {
+    let row = Object.keys(stateStore.results.display_fields).map(k => {
         if (stateStore.results.display_fields[k] === true) {
             if (Array.isArray(props.item[k])) {
                 return <td key={props.item[k]}>{props.item[k].map(r => (<li key={r}>{r}</li>))}</td>
