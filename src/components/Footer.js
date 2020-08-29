@@ -6,7 +6,7 @@ import React from "react";
 const Footer = () => {
 
     return (
-        <Container>
+        <Container fluid className="mt-5">
             <Navbar className="justify-content-center" bg="dark" variant="dark" expand="lg" fixed="bottom">
                 <Nav className="px-5">
                     <a href="https://uni-koeln.de" target="_blank" rel="noopener noreferrer">

@@ -65,7 +65,7 @@ class SearchResults extends React.Component {
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid className="mb-5">
                 <Row>
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
@@ -96,6 +96,7 @@ class SearchResults extends React.Component {
                         {this.renderEntries()}
                     </Col>
                 </Row>
+                <br/>
             </Container>);
 
     }
