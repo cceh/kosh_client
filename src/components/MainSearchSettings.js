@@ -14,10 +14,10 @@ class MainSearchSettings extends React.Component {
     }
 
     default_setup() {
-        stateStore.dict_collection.base_path = "freedict";
-        stateStore.dict_collection.dict_id = "eng_lat";
-        stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
-        stateStore.search.field = "headword";
+        stateStore.dict_collection.base_path = "mpcd";
+        stateStore.dict_collection.dict_id = "gpv";
+        stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
+        stateStore.search.field = "trc";
         stateStore.search.query_type = "prefix"
     }
 
@@ -26,12 +26,8 @@ class MainSearchSettings extends React.Component {
     }
 
     setSpec() {
-        let base_url = ''
-        if (stateStore.dict_collection.base_path === "dicts") {
-            base_url = 'https://api.c-salt.uni-koeln.de/'
-        } else {
-            base_url = 'https://kosh.uni-koeln.de/'
-        }
+        let base_url = 'http://localhost:5000/'
+
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
         stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
         console.log(spec_url)
@@ -62,32 +58,8 @@ class MainSearchSettings extends React.Component {
     setDictIds = async e => {
         console.log(e.target.value)
         switch (e.target.value) {
-            case "Freedict":
+            case "mpcd":
                 this.default_setup()
-                this.setSpec()
-                break;
-            case "CDSD":
-                stateStore.dict_collection.base_path = "cdsd";
-                stateStore.dict_collection.dict_ids = stateStore.cdsd_ids;
-                stateStore.dict_collection.dict_id = "ap90";
-                stateStore.search.field = "headword";
-                stateStore.search.query_type = "prefix";
-                this.setSpec()
-                break;
-            case "C-SALT Sanskrit":
-                stateStore.dict_collection.base_path = "dicts";
-                stateStore.dict_collection.dict_ids = stateStore.c_salt_sanskrit_ids;
-                stateStore.dict_collection.dict_id = "mw";
-                stateStore.search.field = "headword_slp1";
-                stateStore.search.query_type = "prefix";
-                this.setSpec()
-                break;
-            case "Kosh Data":
-                stateStore.dict_collection.base_path = "api";
-                stateStore.dict_collection.dict_ids = stateStore.kosh_data_ids;
-                stateStore.dict_collection.dict_id = "de_alcedo";
-                stateStore.search.field = "lemma";
-                stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
             default:

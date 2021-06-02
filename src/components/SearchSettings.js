@@ -19,12 +19,8 @@ class SearchSettings extends React.Component {
 
     search = async val => {
         stateStore.search.loading = true;
-        let base_url = ''
-        if (stateStore.dict_collection.base_path === "dicts") {
-            base_url = 'https://api.c-salt.uni-koeln.de/'
-        } else {
-            base_url = 'https://kosh.uni-koeln.de/'
-        }
+        let base_url = 'http://localhost:5000/'
+  
         const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
         console.log(q)
         const results = await search(q);
