@@ -26,7 +26,7 @@ class MainSearchSettings extends React.Component {
     }
 
     setSpec() {
-        let base_url = 'http://localhost:5000/'
+        let base_url = 'http://127.0.0.1:5000/'
 
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
         stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
