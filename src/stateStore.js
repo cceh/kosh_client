@@ -5,7 +5,11 @@ const stateStore = store({
 
     collection_ids: ["mpcd"],
 
+<<<<<<< HEAD
     mpcd_ids: ["mmp", "cpd","gpv", "pyv"],
+=======
+    mpcd_ids: ["gpv", "pyv", "mmp" ],
+>>>>>>> 30e3538224c81ff349e19e0ac2878760ad18f6f7
 
     search: {
         entries: null,
