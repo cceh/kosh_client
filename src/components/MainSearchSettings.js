@@ -15,7 +15,7 @@ class MainSearchSettings extends React.Component {
 
     default_setup() {
         stateStore.dict_collection.base_path = "mpcd";
-        stateStore.dict_collection.dict_id = "gpv";
+        stateStore.dict_collection.dict_id = "mmp";
         stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
         stateStore.search.field = "trc";
         stateStore.search.query_type = "prefix"
@@ -72,6 +72,8 @@ class MainSearchSettings extends React.Component {
     setDictId = e => {
         stateStore.dict_collection.dict_id = e.target.value
         console.log(stateStore.dict_collection.dict_id)
+        stateStore.search.field = "trc";
+        stateStore.search.query_type = "prefix"
         this.setSpec()
 
     };
