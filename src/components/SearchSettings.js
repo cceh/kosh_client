@@ -8,7 +8,7 @@ import stateStore from "../stateStore";
 import React from "react";
 import {search} from "../utils";
 import {withRouter} from "react-router-dom";
-import {view} from "react-easy-state";
+import {view} from "@risingstack/react-easy-state";
 
 class SearchSettings extends React.Component {
 
