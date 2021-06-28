@@ -1,6 +1,6 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
-import {view} from "react-easy-state";
+import {view} from "@risingstack/react-easy-state";
 import React from "react";
 
 const Footer = () => {

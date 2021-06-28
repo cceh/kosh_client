@@ -8,9 +8,10 @@ import stateStore from "../stateStore";
 import React from "react";
 import {search} from "../utils";
 import {withRouter} from "react-router-dom";
-import {view} from "react-easy-state";
+import {view} from "@risingstack/react-easy-state";
 
 class SearchSettings extends React.Component {
+
 
     onChangeHandler = e => {
         this.search(e.target.value);
@@ -59,9 +60,11 @@ class SearchSettings extends React.Component {
                             <Form onSubmit={(e) => {
                                 e.preventDefault();
                             }} inline>
-                                <FormControl value={stateStore.search.value}
+                                <FormControl type="text"
+                                value={stateStore.search.value}
                                              onChange={e => this.onChangeHandler(e)}
                                              placeholder="Search for ..." className="mr-sm-2"/>
+
                                 <Button variant="outline-success">Search</Button>
                             </Form>
                         </Navbar>

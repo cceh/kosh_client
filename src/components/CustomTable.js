@@ -1,6 +1,6 @@
 import React from "react";
 import Table from 'react-bootstrap/Table';
-import {view} from 'react-easy-state';
+import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
 import stateStore from "../stateStore";
 import CustomRow from "./CustomRow";
