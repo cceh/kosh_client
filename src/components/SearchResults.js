@@ -35,12 +35,11 @@ class SearchResults extends React.Component {
 
     handleChange = (e, v) => {
         stateStore.results.display_fields[v] = e.target.checked
-        console.log(stateStore.results.display_fields)
+        console.warn(stateStore.results.display_fields[v], e.target.checked)
     }
 
     handleIsItChecked(v) {
-        return stateStore.results.display_fields.valueOf(v)
-
+        return stateStore.results.display_fields[v]
     }
 
     renderEntries() {

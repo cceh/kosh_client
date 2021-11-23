@@ -1,8 +1,8 @@
 import React from 'react'
-import {Navbar} from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import stateStore from '../stateStore'
-import {view} from 'react-easy-state';
-import {withRouter} from 'react-router-dom';
+import { view } from 'react-easy-state';
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 
@@ -39,6 +39,9 @@ class MainSearchSettings extends React.Component {
             console.log(stateStore.search.fields)
             // set default fields to be displayed
             stateStore.results.display_fields = this.initFields(stateStore.search.fields)
+            stateStore.results.display_fields['xml'] = false
+            stateStore.results.display_fields['id'] = false
+            console.log(stateStore.results.display_fields);
             stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
         }).catch((error) => {
             console.warn('error fetching spec');
@@ -98,19 +101,19 @@ class MainSearchSettings extends React.Component {
             <Navbar expand="lg" sticky="top" className="bg-light">
                 <CustomSelect
                     list={stateStore.collection_ids} onc={this.setDictIds}
-                    label={"Collection: "}/>
+                    label={"Collection: "} />
                 <CustomSelect
                     list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
+                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id} />
                 <CustomSelect list={stateStore.search.fields}
-                              onc={this.setField}
-                              label={"Field: "} preselected={stateStore.search.field}/>
+                    onc={this.setField}
+                    label={"Field: "} preselected={stateStore.search.field} />
                 <CustomSelect
                     list={stateStore.search.query_types} onc={this.setQueryType}
-                    label={"Query Type: "} preselected={stateStore.search.query_type}/>
+                    label={"Query Type: "} preselected={stateStore.search.query_type} />
                 <CustomSelect
                     list={stateStore.search.query_sizes} onc={this.setQuerySize}
-                    label={"Query Size: "} preselected={stateStore.search.query_size}/>
+                    label={"Query Size: "} preselected={stateStore.search.query_size} />
             </Navbar>
         )
     }
