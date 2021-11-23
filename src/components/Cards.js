@@ -1,7 +1,7 @@
 import React from "react";
 import EntryCard from "./EntryCard";
 import CardColumns from 'react-bootstrap/CardColumns';
-import {view} from 'react-easy-state';
+import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
 
 

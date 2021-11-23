@@ -1,7 +1,7 @@
 import {Form} from "react-bootstrap";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import {view} from "react-easy-state";
+import {view} from "@risingstack/react-easy-state";
 
 
 const CustomCheckbox = ({labels, handleChange, isChecked}) => {

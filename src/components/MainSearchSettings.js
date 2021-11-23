@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navbar } from 'react-bootstrap'
 import stateStore from '../stateStore'
-import { view } from 'react-easy-state';
-import { withRouter } from 'react-router-dom';
+import {view} from "@risingstack/react-easy-state";
+import {withRouter} from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 
