@@ -18,7 +18,7 @@ class MainSearchSettings extends React.Component {
         stateStore.dict_collection.dict_id = "mmp";
         stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
         stateStore.search.field = "trc";
-        stateStore.search.query_type = "prefix"
+        stateStore.search.query_type = "wildcard"
     }
 
     componentDidMount() {
@@ -76,7 +76,7 @@ class MainSearchSettings extends React.Component {
         stateStore.dict_collection.dict_id = e.target.value
         console.log(stateStore.dict_collection.dict_id)
         stateStore.search.field = "trc";
-        stateStore.search.query_type = "prefix"
+        stateStore.search.query_type = "wildcard"
         this.setSpec()
 
     };
