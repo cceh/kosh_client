@@ -5,6 +5,7 @@ import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
+import CustomDropdown from './CustomDropdown';
 
 class MainSearchSettings extends React.Component {
 
@@ -15,7 +16,7 @@ class MainSearchSettings extends React.Component {
 
     default_setup() {
         stateStore.dict_collection.base_path = "mpcd";
-        stateStore.dict_collection.dict_id = "mmp";
+        stateStore.dict_collection.dict_id = ["mmp"];
         stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
         stateStore.search.field = "trc";
         stateStore.search.query_type = "wildcard"
@@ -27,7 +28,7 @@ class MainSearchSettings extends React.Component {
 
     setSpec() {
         let base_url = 'https://sandbox.cceh.uni-koeln.de/'
-
+        
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
         stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
         console.log(spec_url)
@@ -57,7 +58,7 @@ class MainSearchSettings extends React.Component {
         return obj
     }
 
-
+    /*
     setDictIds = async e => {
         console.log(e.target.value)
         switch (e.target.value) {
@@ -71,6 +72,7 @@ class MainSearchSettings extends React.Component {
         }
         console.log(stateStore.dict_collection.dict_ids)
     };
+    */
 
     setDictId = e => {
         stateStore.dict_collection.dict_id = e.target.value
@@ -99,12 +101,7 @@ class MainSearchSettings extends React.Component {
     render() {
         return (
             <Navbar expand="lg" sticky="top" className="bg-light">
-                <CustomSelect
-                    list={stateStore.collection_ids} onc={this.setDictIds}
-                    label={"Collection: "} />
-                <CustomSelect
-                    list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id} />
+                <CustomDropdown options={stateStore.mpcd_ids} label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id} onc={""}/>
                 <CustomSelect list={stateStore.search.fields}
                     onc={this.setField}
                     label={"Field: "} preselected={stateStore.search.field} />

@@ -49,14 +49,17 @@ class SearchResults extends React.Component {
         }
 
         if (this.isEmpty(stateStore.search.entries)) {
+            console.log(stateStore.search.entries[0])
             return <Alert key="no_entries" variant="warning"> No entries found</Alert>;
         }
 
         if (stateStore.search.entries) {
             if (stateStore.view.table === true) {
-                return <Table results={stateStore.search.entries}/>;
+                var tableList = stateStore.search.entries.map((entry) => <Table results={entry} header={'Hello'}/>)
+                return tableList;
             } else {
-                return <Cards results={stateStore.search.entries}/>;
+                var cardList = stateStore.search.entries.map((entry) => <Cards results={entry} header={'Hello'}/>)
+                return cardList;
             }
         }
     }

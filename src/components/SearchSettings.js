@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Navbar from "react-bootstrap/Navbar";
 import MainSearchSettings from "./MainSearchSettings";
+import QueryList from './QueryList';
 import {Button, Form, FormControl} from "react-bootstrap";
 import stateStore from "../stateStore";
 import React from "react";
@@ -14,6 +15,8 @@ class SearchSettings extends React.Component {
 
 
     onChangeHandler = e => {
+        stateStore.search.query = []
+        stateStore.search.entries = [];
         this.search(e.target.value);
         stateStore.search.value = e.target.value;
     };
@@ -21,17 +24,19 @@ class SearchSettings extends React.Component {
     search = async val => {
         stateStore.search.loading = true;
         let base_url = 'https://sandbox.cceh.uni-koeln.de/'
-  
-        const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
-        console.log(q)
-        const results = await search(q);
-        const entries = results;
-        stateStore.search.query = q
-        stateStore.search.entries = entries;
-        stateStore.search.loading = false;
-
+        for (var id in stateStore.dict_collection.dict_id){
+            console.log(id, stateStore.dict_collection.dict_id[id])
+            const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_ids[id] + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
+            console.log(q)
+            const results = await search(q);
+            const entries = results;
+            stateStore.search.query.push(q)
+            stateStore.search.entries.push(entries);
+            console.log(stateStore.search.entries);
+            stateStore.search.loading = false;
+        }
     };
-
+    
     render() {
         return (
             <Container fluid>
@@ -75,8 +80,7 @@ class SearchSettings extends React.Component {
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
                             <Navbar.Brand href="https://kosh.uni-koeln.de">Query: </Navbar.Brand>
-                            <h7><a target="_blank" rel="noopener noreferrer"
-                                   href={stateStore.search.query}>{stateStore.search.query}</a></h7>
+                            <QueryList queries={stateStore.search.query} />
                         </Navbar>
 
                     </Col>
