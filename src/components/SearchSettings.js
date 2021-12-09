@@ -27,12 +27,10 @@ class SearchSettings extends React.Component {
         for (var id in stateStore.dict_collection.dict_id){
             console.log(id, stateStore.dict_collection.dict_id[id])
             const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_ids[id] + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
-            console.log(q)
             const results = await search(q);
             const entries = results;
             stateStore.search.query.push(q)
             stateStore.search.entries.push(entries);
-            console.log(stateStore.search.entries);
             stateStore.search.loading = false;
         }
     };

@@ -54,11 +54,16 @@ class SearchResults extends React.Component {
         }
 
         if (stateStore.search.entries) {
+            var c = [];
+            for(var i=0;i<=stateStore.search.entries.length;i++){
+                c.push([stateStore.search.entries[i],stateStore.dict_collection.dict_id[i]])
+            }
+              console.log(c)
             if (stateStore.view.table === true) {
-                var tableList = stateStore.search.entries.map((entry) => <Table results={entry} header={'Hello'}/>)
+                var tableList = c.map((entry) => <Table results={entry[0]} header={entry[1]}/>)
                 return tableList;
             } else {
-                var cardList = stateStore.search.entries.map((entry) => <Cards results={entry} header={'Hello'}/>)
+                var cardList = c.map((entry) => <Cards results={entry[0]} header={entry[1]}/>)
                 return cardList;
             }
         }
