@@ -6,6 +6,8 @@ import {withRouter} from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 import CustomDropdown from './CustomDropdown';
+import CustomMultiselect from './CustomMultiselect';
+import CustomCheckbox from './CustomCheckbox';
 
 class MainSearchSettings extends React.Component {
 
@@ -98,10 +100,26 @@ class MainSearchSettings extends React.Component {
         console.log(stateStore.search.query_size)
     }
 
+    selectedOptions = (e) => {
+        if (e.target.checked){
+            stateStore.dict_collection.dict_id.push(e.target.id)
+        }
+        else
+        {
+            stateStore.dict_collection.dict_id.pop(stateStore.dict_collection.dict_id.indexOf(e.target.id))
+        }
+        console.log(stateStore.dict_collection.dict_id)
+    }
+
     render() {
         return (
+            <>
             <Navbar expand="lg" sticky="top" className="bg-light">
-                <CustomDropdown options={stateStore.mpcd_ids} label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id} onc={""}/>
+
+                <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
+            </Navbar>
+            <Navbar expand="lg" sticky="top" className="bg-light">
+                
                 <CustomSelect list={stateStore.search.fields}
                     onc={this.setField}
                     label={"Field: "} preselected={stateStore.search.field} />
@@ -112,6 +130,7 @@ class MainSearchSettings extends React.Component {
                     list={stateStore.search.query_sizes} onc={this.setQuerySize}
                     label={"Query Size: "} preselected={stateStore.search.query_size} />
             </Navbar>
+            </>
         )
     }
 }
