@@ -42,31 +42,29 @@ class SearchResults extends React.Component {
         return stateStore.results.display_fields[v]
     }
 
-    renderEntries() {
-
+    renderEntries(){
         if (stateStore.search.entries == null) {
             return <Alert key="no_entries" variant="info">Type to search...</Alert>;
         }
 
         if (this.isEmpty(stateStore.search.entries)) {
-            console.log(stateStore.search.entries[0])
             return <Alert key="no_entries" variant="warning"> No entries found</Alert>;
         }
 
-        if (stateStore.search.entries) {
-            var c = [];
-            for(var i=0;i<=stateStore.search.entries.length;i++){
-                c.push([stateStore.search.entries[i],stateStore.dict_collection.dict_id[i]])
+        var viewList = Object.keys(stateStore.search.entries).map((key) => {
+            if (!this.isEmpty(stateStore.search.entries[key])) {
+                if (stateStore.view.table === true) {
+                    return <Table key={"table_"+key} results={stateStore.search.entries[key]} header={key}/>
+                }
+                else {
+                    return <Cards key={"cards_"+key} results={stateStore.search.entries[key]} header={key}/>
+                    
+                }
             }
-              console.log(c)
-            if (stateStore.view.table === true) {
-                var tableList = c.map((entry) => <Table results={entry[0]} header={entry[1]}/>)
-                return tableList;
-            } else {
-                var cardList = c.map((entry) => <Cards results={entry[0]} header={entry[1]}/>)
-                return cardList;
-            }
-        }
+            return null
+
+        })
+        return viewList;
     }
 
 

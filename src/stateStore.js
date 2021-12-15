@@ -10,7 +10,7 @@ const stateStore = store({
 
 
     search: {
-        entries: [],
+        entries: {},
         loading: false,
         value: "",
         field: "",

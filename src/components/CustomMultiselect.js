@@ -14,10 +14,10 @@ const CustomMultiselect = ({labels,preselected,onc}) => {
         />))
 
     return (
-        <Form  key="dictionary_fields">
-        <span>Dictionaries:</span>
+        <>
+        Dictionaries:
         {checkboxList}
-        </Form>
+        </>
     )
 }
 

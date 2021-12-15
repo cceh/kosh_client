@@ -9,7 +9,6 @@ var selectedOptions = (e) => {
     for (var option of e.target.options){
         if (option.selected){selectedOptions.push(option.value)}
     }
-    console.log(selectedOptions)
     stateStore.dict_collection.dict_id = selectedOptions
     return selectedOptions
 }

@@ -106,20 +106,20 @@ class MainSearchSettings extends React.Component {
         }
         else
         {
-            stateStore.dict_collection.dict_id.pop(stateStore.dict_collection.dict_id.indexOf(e.target.id))
+            console.log("To pop:",e.target.id)
+            console.log("poped:",stateStore.dict_collection.dict_id.indexOf(e.target.id))
+            stateStore.dict_collection.dict_id.splice(stateStore.dict_collection.dict_id.indexOf(e.target.id),1)
         }
         console.log(stateStore.dict_collection.dict_id)
     }
-
+// <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
     render() {
         return (
             <>
             <Navbar expand="lg" sticky="top" className="bg-light">
-
-                <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
+            <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
             </Navbar>
             <Navbar expand="lg" sticky="top" className="bg-light">
-                
                 <CustomSelect list={stateStore.search.fields}
                     onc={this.setField}
                     label={"Field: "} preselected={stateStore.search.field} />

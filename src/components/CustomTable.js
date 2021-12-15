@@ -9,7 +9,7 @@ import CustomRow from "./CustomRow";
 const CustomTable = ({results,header}) => {
     let entries = <h3>Loading...</h3>;
     let head = "";
-    if (results) {
+    if (results && results.length >0) {
 
         head = Object.keys(stateStore.results.display_fields).map(k => {
             if (stateStore.results.display_fields[k] === true) {

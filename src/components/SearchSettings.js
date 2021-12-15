@@ -16,21 +16,22 @@ class SearchSettings extends React.Component {
 
     onChangeHandler = e => {
         stateStore.search.query = []
-        stateStore.search.entries = [];
-        this.search(e.target.value);
+        stateStore.search.entries = {};
+        if(e.target.value !== ""){
+            this.search(e.target.value);
+        }   
         stateStore.search.value = e.target.value;
     };
 
     search = async val => {
         stateStore.search.loading = true;
         let base_url = 'https://sandbox.cceh.uni-koeln.de/'
-        for (var id in stateStore.dict_collection.dict_id){
-            console.log(id, stateStore.dict_collection.dict_id[id])
-            const q = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_ids[id] + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
+        for (var id of stateStore.dict_collection.dict_id){
+            const q = base_url + stateStore.dict_collection.base_path + `/` + id + `/restful/entries?field=` + stateStore.search.field + `&query_type=` + stateStore.search.query_type + `&query=${val}&size=` + stateStore.search.query_size;
             const results = await search(q);
             const entries = results;
             stateStore.search.query.push(q)
-            stateStore.search.entries.push(entries);
+            stateStore.search.entries[id] = entries;
             stateStore.search.loading = false;
         }
     };
