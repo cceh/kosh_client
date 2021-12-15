@@ -6,10 +6,10 @@ import stateStore from "../stateStore";
 import CustomRow from "./CustomRow";
 
 
-const CustomTable = ({results}) => {
+const CustomTable = ({results,header}) => {
     let entries = <h3>Loading...</h3>;
     let head = "";
-    if (results) {
+    if (results && results.length >0) {
 
         head = Object.keys(stateStore.results.display_fields).map(k => {
             if (stateStore.results.display_fields[k] === true) {
@@ -22,6 +22,8 @@ const CustomTable = ({results}) => {
 
     }
     return (
+        <>
+        <h3>{header}</h3>
         <Table hover responsive="sm">
             <thead>
             <tr key="t_head">
@@ -30,6 +32,7 @@ const CustomTable = ({results}) => {
             </thead>
             <tbody key="tbody">{entries}</tbody>
         </Table>
+        </>
     );
 };
 
