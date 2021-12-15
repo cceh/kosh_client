@@ -106,11 +106,8 @@ class MainSearchSettings extends React.Component {
         }
         else
         {
-            console.log("To pop:",e.target.id)
-            console.log("poped:",stateStore.dict_collection.dict_id.indexOf(e.target.id))
             stateStore.dict_collection.dict_id.splice(stateStore.dict_collection.dict_id.indexOf(e.target.id),1)
         }
-        console.log(stateStore.dict_collection.dict_id)
     }
 // <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
     render() {

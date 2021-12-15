@@ -79,7 +79,7 @@ class SearchSettings extends React.Component {
                     <Col>
                         <Navbar bg="light" variant="light" expand="lg" sticky="top">
                             <Navbar.Brand href="https://kosh.uni-koeln.de">Query: </Navbar.Brand>
-                            <QueryList queries={stateStore.search.query} />
+                            <QueryList queries={stateStore.search.query.map(query => query )} />
                         </Navbar>
 
                     </Col>
