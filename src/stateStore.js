@@ -10,12 +10,12 @@ const stateStore = store({
 
 
     search: {
-        entries: null,
+        entries: {},
         loading: false,
         value: "",
         field: "",
         fields: [],
-        query: '',
+        query: [],
         query_types: [],
         query_type: "",
         query_size: 10,
@@ -26,7 +26,7 @@ const stateStore = store({
     dict_collection: {
         base_path: "",
         dict_ids: [],
-        dict_id: "",
+        dict_id: [],
         dict_base_url: ""
     },
 

@@ -5,7 +5,7 @@ import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
 
 
-const Cards = ({results}) => {
+const Cards = ({results,header}) => {
     let entries = <h3>Loading...</h3>;
 
     if (results) {
@@ -13,9 +13,12 @@ const Cards = ({results}) => {
 
     }
     return (
+        <>
+        <h2>{header}</h2>
         <CardColumns>
             {entries}
         </CardColumns>
+        </>
     );
 };
 
