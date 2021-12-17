@@ -13,6 +13,17 @@ import {view} from "@risingstack/react-easy-state";
 
 class SearchSettings extends React.Component {
 
+    onSettingsChange = () => {
+        stateStore.search.query = []
+        stateStore.search.entries = {};
+        this.search(stateStore.search.value);
+    }
+
+    onButtonClick = () => {
+        stateStore.search.query = []
+        stateStore.search.entries = {};
+        this.search(stateStore.search.value);
+    }
 
     onChangeHandler = e => {
         stateStore.search.query = []
@@ -69,7 +80,7 @@ class SearchSettings extends React.Component {
                                              onChange={e => this.onChangeHandler(e)}
                                              placeholder="Search for ..." className="mr-sm-2"/>
 
-                                <Button variant="outline-success">Search</Button>
+                                <Button variant="outline-success" onClick={this.onButtonClick}>Search</Button>
                             </Form>
                         </Navbar>
                     </Col>
