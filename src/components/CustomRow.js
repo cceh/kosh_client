@@ -30,7 +30,16 @@ const CustomRow = props => {
                 } else if (k === "id") {
                     let url = stateStore.dict_collection.dict_base_url + `/ids?ids=` + props.item[k];
                     return <td key={props.item[k]}><a href={url}>{props.item[k]}</a></td>
-                } else {
+                } else if (k === "attest") {
+                    var items = [];
+                    if(typeof(props.item[k]) === typeof("")){
+                        items = props.item[k].split('$$$').map((line) => <li>{line}</li>)
+                    }
+                    return <td key={k}>
+                        <ul>{items}</ul>
+                    </td>
+                }
+                else {
                     return <td key={k}>
                         <div>{props.item[k]}</div>
                     </td>
