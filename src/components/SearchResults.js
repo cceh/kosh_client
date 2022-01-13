@@ -51,6 +51,7 @@ class SearchResults extends React.Component {
             return <Alert key="no_entries" variant="warning"> No entries found</Alert>;
         }
 
+        
         var viewList = Object.keys(stateStore.search.entries).map((key) => {
             if (!this.isEmpty(stateStore.search.entries[key])) {
                 if (stateStore.view.table === true) {

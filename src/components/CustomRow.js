@@ -5,13 +5,13 @@ import stateStore from "../stateStore";
 import beautify from 'xml-beautifier';
 import Highlight, {defaultProps} from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/github";
-
+import './table.css';
 
 const CustomRow = props => {
 
     let row = Object.keys(stateStore.results.display_fields).map(k => {
         if (stateStore.results.display_fields[k] === true) {
-            if (Array.isArray(props.item[k])) {
+            if (Array.isArray(props.item[k]) && props.item[k].length > 1){
                 return <td key={props.item[k]}>{props.item[k].map(r => (<li key={r}>{r}</li>))}</td>
                     ;
             } else {
