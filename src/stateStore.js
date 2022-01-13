@@ -5,8 +5,8 @@ const stateStore = store({
 
     collection_ids: ["mpcd"],
 
-
-    mpcd_ids: ["mmp", "cpd","gpv", "pyv", "nmp"],
+    // exclude "gpv" due to errors
+    mpcd_ids: ["mmp", "cpd", "pyv", "nmp","dmx","gbd"],
 
 
     search: {
