@@ -1,0 +1,18 @@
+tr th:first-child{
+    width: 1%;
+    white-space: nowrap;
+}
+
+tr th:last-child{
+    width: 100%;
+}
+
+
+tr td:first-child{
+    width: 1%;
+    white-space: nowrap;
+}
+
+tr td:last-child{
+    width: 100%;
+}

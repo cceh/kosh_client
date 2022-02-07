@@ -39,9 +39,17 @@ class MainSearchSettings extends React.Component {
             stateStore.search.fields = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][0]['enum'];
             //remove created
             stateStore.search.fields = stateStore.search.fields.filter(item => item !== 'created')
-            console.log(stateStore.search.fields)
+            console.log(stateStore.search.fields.indexOf('trc'))
+            let temp = ['trc'];
+
+            for(var i in stateStore.search.fields){
+                if(stateStore.search.fields[i] !== 'trc'){
+                    temp.push(stateStore.search.fields[i])
+                }
+            }
+
             // set default fields to be displayed
-            stateStore.results.display_fields = this.initFields(stateStore.search.fields)
+            stateStore.results.display_fields = this.initFields(temp)
             stateStore.results.display_fields['xml'] = false
             stateStore.results.display_fields['id'] = false
             console.log(stateStore.results.display_fields);
