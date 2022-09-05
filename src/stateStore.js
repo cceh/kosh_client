@@ -1,4 +1,4 @@
-import {store} from '@risingstack/react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 
 
 const stateStore = store({
@@ -6,7 +6,7 @@ const stateStore = store({
     collection_ids: ["mpcd"],
 
 
-    mpcd_ids: ["awn", "dmx","gbd", "gpv", "pyv", "sns", "wz"],
+    mpcd_ids: ["awn", "cpd", "dmx", "gbd", "gpv", "mmp", "nmp", "pyv", "sns", "wz"],
 
 
     search: {
@@ -36,8 +36,8 @@ const stateStore = store({
     },
 
     views: [
-        {name: 'TableView', value: 'table'},
-        {name: 'CardView', value: 'card'},
+        { name: 'TableView', value: 'table' },
+        { name: 'CardView', value: 'card' },
     ],
 
     dict_spec: {
