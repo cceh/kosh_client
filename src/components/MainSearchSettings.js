@@ -5,9 +5,7 @@ import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
-import CustomDropdown from './CustomDropdown';
 import CustomMultiselect from './CustomMultiselect';
-import CustomCheckbox from './CustomCheckbox';
 
 class MainSearchSettings extends React.Component {
 
@@ -29,7 +27,7 @@ class MainSearchSettings extends React.Component {
     }
 
     setSpec() {
-        let base_url = 'https://sandbox.cceh.uni-koeln.de/'
+        let base_url = 'https://kosh.uni-koeln.de/'
         
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
         stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
