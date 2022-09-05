@@ -29,7 +29,7 @@ class MainSearchSettings extends React.Component {
     }
 
     setSpec() {
-        let base_url = 'https://sandbox.cceh.uni-koeln.de/'
+        let base_url = 'https://kosh.uni-koeln.de/'
         
         const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful/spec`;
         stateStore.dict_collection.dict_base_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_id + `/restful`
