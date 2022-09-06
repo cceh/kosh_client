@@ -18,7 +18,7 @@ const stateStore = store({
         query: [],
         query_types: [],
         query_type: "",
-        query_size: 10,
+        query_size: 20,
         query_sizes: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
     },
