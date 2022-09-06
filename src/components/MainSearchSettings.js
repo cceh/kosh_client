@@ -1,8 +1,8 @@
 import React from 'react'
-import {Navbar} from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import stateStore from '../stateStore'
-import {view} from "@risingstack/react-easy-state";
-import {withRouter} from 'react-router-dom';
+import { view } from "@risingstack/react-easy-state";
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 
@@ -14,10 +14,10 @@ class MainSearchSettings extends React.Component {
     }
 
     default_setup() {
-        stateStore.dict_collection.base_path = "freedict";
-        stateStore.dict_collection.dict_id = "eng_lat";
-        stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
-        stateStore.search.field = "headword";
+        stateStore.dict_collection.base_path = "mpcd";
+        stateStore.dict_collection.dict_id = "pyv";
+        stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
+        stateStore.search.field = "trc";
         stateStore.search.query_type = "prefix"
     }
 
@@ -63,7 +63,11 @@ class MainSearchSettings extends React.Component {
         console.log(e.target.value)
         switch (e.target.value) {
             case "Freedict":
-                this.default_setup()
+                stateStore.dict_collection.base_path = "freedict";
+                stateStore.dict_collection.dict_id = "eng_lat";
+                stateStore.dict_collection.dict_ids = stateStore.freedict_ids;
+                stateStore.search.field = "headword";
+                stateStore.search.query_type = "prefix"
                 this.setSpec()
                 break;
             case "CDSD":
@@ -90,6 +94,12 @@ class MainSearchSettings extends React.Component {
                 stateStore.search.query_type = "prefix";
                 this.setSpec()
                 break;
+
+            case "MPCD":
+                this.default_setup()
+                this.setSpec()
+                break;
+
             default:
                 this.default_setup()
                 this.setSpec()
@@ -124,19 +134,19 @@ class MainSearchSettings extends React.Component {
             <Navbar expand="lg" sticky="top" className="bg-light">
                 <CustomSelect
                     list={stateStore.collection_ids} onc={this.setDictIds}
-                    label={"Collection: "}/>
+                    label={"Collection: "} />
                 <CustomSelect
                     list={stateStore.dict_collection.dict_ids} onc={this.setDictId}
-                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id}/>
+                    label={"Dictionary: "} preselected={stateStore.dict_collection.dict_id} />
                 <CustomSelect list={stateStore.search.fields}
-                              onc={this.setField}
-                              label={"Field: "} preselected={stateStore.search.field}/>
+                    onc={this.setField}
+                    label={"Field: "} preselected={stateStore.search.field} />
                 <CustomSelect
                     list={stateStore.search.query_types} onc={this.setQueryType}
-                    label={"Query Type: "} preselected={stateStore.search.query_type}/>
+                    label={"Query Type: "} preselected={stateStore.search.query_type} />
                 <CustomSelect
                     list={stateStore.search.query_sizes} onc={this.setQuerySize}
-                    label={"Query Size: "} preselected={stateStore.search.query_size}/>
+                    label={"Query Size: "} preselected={stateStore.search.query_size} />
             </Navbar>
         )
     }
