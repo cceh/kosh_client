@@ -10,7 +10,7 @@ import CustomMultiselect from './CustomMultiselect';
 import CustomCheckbox from './CustomCheckbox';
 
 class MainSearchSettings extends React.Component {
-
+g
     constructor(props) {
         super(props);
         this.default_setup()
