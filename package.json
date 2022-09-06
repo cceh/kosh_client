@@ -1,6 +1,7 @@
 {
   "name": "kosh_react",
   "version": "0.1.0",
+  "homepage": "/mpcd_dicts/",
   "private": true,
   "dependencies": {
     "@risingstack/react-easy-state": "^6.3.0",
