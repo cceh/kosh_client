@@ -18,7 +18,7 @@ class MainSearchSettings extends React.Component {
 
     default_setup() {
         stateStore.dict_collection.base_path = "mpcd";
-        stateStore.dict_collection.dict_id = ["pyv"];
+        stateStore.dict_collection.dict_id = ["mmp"];
         stateStore.dict_collection.dict_ids = stateStore.mpcd_ids;
         stateStore.search.field = "trc";
         stateStore.search.query_type = "wildcard"
