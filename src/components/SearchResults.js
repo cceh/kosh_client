@@ -1,6 +1,6 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
-import {view} from "react-easy-state";
+import {view} from "@risingstack/react-easy-state";
 import {Row, Col, Container, Navbar, Alert, Nav} from 'react-bootstrap';
 import CustomCheckbox from "./CustomCheckbox";
 import stateStore from "../stateStore";
