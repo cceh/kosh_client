@@ -1,11 +1,11 @@
-import {store} from "@risingstack/react-easy-state";
+import { store } from "@risingstack/react-easy-state";
 
 
 
 const stateStore = store({
 
 
-    collection_ids: ["MPCD","Freedict", "Kosh Data", "C-SALT Sanskrit"],
+    collection_ids: ["MPCD", "Freedict", "Kosh Data", "C-SALT Sanskrit", "Creole"],
 
     mpcd_ids: ["awn", "dmx", "lfv", "gbd", "gpv", "pyv", "sns", "wz"],
 
@@ -20,6 +20,8 @@ const stateStore = store({
         "bur", "stc", "ae", "bor", "mwe", "bop", "krm", "skd", "vcp"],
 
     c_salt_sanskrit_ids: ["mw", "ap90", "bhs", "vei", "pwg", "gra", "ae"],
+
+    creole_ids: ["deca"],
 
     search: {
         entries: null,
@@ -48,8 +50,8 @@ const stateStore = store({
     },
 
     views: [
-        {name: 'TableView', value: 'table'},
-        {name: 'CardView', value: 'card'},
+        { name: 'TableView', value: 'table' },
+        { name: 'CardView', value: 'card' },
     ],
 
     dict_spec: {

@@ -95,6 +95,16 @@ class MainSearchSettings extends React.Component {
                 this.setSpec()
                 break;
 
+            case "Creole":
+                stateStore.dict_collection.base_path = "creole";
+                stateStore.dict_collection.dict_ids = stateStore.creole_ids;
+                stateStore.dict_collection.dict_id = "deca";
+                stateStore.search.field = "lemma";
+                stateStore.search.query_type = "prefix";
+                this.setSpec()
+                break;
+
+
             case "MPCD":
                 this.default_setup()
                 this.setSpec()
