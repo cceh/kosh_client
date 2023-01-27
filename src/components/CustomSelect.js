@@ -1,31 +1,29 @@
-import {Form} from "react-bootstrap";
-import React from "react";
-import {withRouter} from "react-router-dom";
-import {view} from "@risingstack/react-easy-state";
+import React from "react"
 
-const CustomSelect = ({list, onc, label, preselected}) => {
-    if (!list.length) {
-        return null;
-    }
-    return (
-        <Form inline>
-            <Form.Group controlId={'select_' + label}>
-                <Form.Label className="mr-1 ml-1">{label}</Form.Label>
-                <Form.Control value={preselected} as="select" onChange={v => onc(v)} custom>
-                    {list.map(v => (
-                        <option
-                            id={'ID_' + v}
-                            key={'quick_field_' + v}
-                            value={v}
-                            className="secondary-font">
-                            {v}
-                        </option>
-                    ))}
-                </Form.Control>
-            </Form.Group>
-        </Form>
+const CustomSelect = ({ fields, label, preselected, onc }) => {
+  if (!fields.length) {
+    return null;
+  }
 
-    );
+  const selectList = fields.map(field => {
+      return (
+        <option
+          id={"ID_" + field}
+          key={"field_option_" + field}
+          value={field}>
+          {field}
+        </option>
+      )
+  })
+
+  return (
+    <form group={"select_" + label} className="mr-2 inline-flex flex-auto ">
+      <label>{label}</label>
+      <select onChange={onc} value={preselected} className="ml-2 form-select text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:border-blue-500 focus:ring focus:outline-none focus:text-gray-700 focus:bg-white cursor-pointer">
+        {selectList}
+      </select>
+    </form>
+  );
 }
 
-export default withRouter(view(CustomSelect));
+export default CustomSelect;

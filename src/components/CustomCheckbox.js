@@ -1,22 +1,31 @@
-import {Form} from "react-bootstrap";
-import React from "react";
-import {withRouter} from "react-router-dom";
-import {view} from "@risingstack/react-easy-state";
+import React from "react"
 
-const CustomCheckbox = ({labels, handleChange, isChecked}) => {
-    if (!labels.length) {
-        return null;
-    }
-    return (
-        <Form key="display_fields">
-            {['checkbox'].map((type) => (
-                <div key={`inline-${type}`}>Display fields : {labels.map(v => (
-                    <Form.Check onChange={e => handleChange(e, v)} defaultChecked={isChecked(v)} className="ml-1" inline
-                                label={v} type={type} id={`inline-${Math.random()}`} key={Math.random()}/>))}
-                </div>
-            ))}
-        </Form>
-    );
+const CustomCheckbox = ({ fields, label, preselected, onc }) => {
+  if (!fields.length) {
+    return null;
+  }
+
+  const checkboxList =
+    fields.map(field => (
+      <div key={"display_div_" + field}>
+        <input
+          type="checkbox"
+          id={field}
+          key={"display_checkbox_" + field}
+          className="m-1 cursor-pointer"
+          onChange={(e) => onc(e, field)}
+          onClick={(e) => onc(e, field)}
+          defaultChecked={preselected(field)} />
+        <label htmlFor={`${field}`} key={"display_label_" + field}>{field}</label>
+      </div>
+    ))
+
+  return (
+    <form key="display_fields" className="inline-flex items-center">
+      <label className="mr-3">{label}</label>
+      {checkboxList}
+    </form>
+  );
 }
 
-export default withRouter(view(CustomCheckbox));
+export default CustomCheckbox;

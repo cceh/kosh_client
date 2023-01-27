@@ -1,9 +1,7 @@
 import React from "react";
 import {view} from "@risingstack/react-easy-state";
 import {withRouter} from 'react-router-dom';
-import SearchResults from "./components/SearchResults";
-import SearchSettings from "./components/SearchSettings";
-import Footer from "./components/Footer";
+import KoshView from "./components/KoshView";
 
 
 class App extends React.Component {
@@ -12,9 +10,7 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <SearchSettings/>
-                <SearchResults/>
-                <Footer/>
+                <KoshView/>
             </div>
         );
     }
