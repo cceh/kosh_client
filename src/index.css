@@ -1,31 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* APP FONTS */
+@layer base {
+    * {
+        @apply font-['Helvetica']
+    }
 
-@font-face {
-    font-family: 'Gentium';
-    src: local('GentiumPlus-R'), url(fonts/GentiumPlus/GentiumPlus-R.woff) format('woff');
+    h1 {
+        @apply lg:text-6xl lg:my-9 md:text-5xl md:my-5 sm:text-3xl sm:my-2 my-2 text-3xl font-black drop-shadow-md text-center;
+    }
+
+    h2 {
+        @apply lg:text-4xl lg:my-9 md:text-2xl md:my-5 sm:text-xl sm:my-2 my-2 text-xl font-black text-center;
+    }
+
+    h3 {
+        @apply md:text-xl sm:text-lg text-lg text-center;
+    }
+
+    h4 {
+        @apply md:text-base sm:text-sm text-sm text-center;
+    }
+
+    textarea {
+        @apply min-h-[80px] max-h-40 border-2 border-[#526B16] rounded pb-4 pr-5;
+    }
+
+    select {
+        @apply min-h-[30px] text-center border-2 border-[#526B16] rounded;
+    }
+
+    .tooltip {
+        @apply invisible absolute;
+    }
+
+    .has-tooltip:hover .tooltip {
+        @apply visible z-50;
+    }
+
+    .website-p {
+        @apply lg:text-sm md:text-xs sm:text-xs text-sm text-justify font-['Helvetica'] dark:!text-white
+    }
+
+    .website-link {
+        @apply lg:text-sm md:text-xs sm:text-xs text-sm text-off hover:text-action font-['Helvetica']
+    }
+
+    th {
+        @apply text-xs text-center p-1 border text-p-gray font-['Helvetica']
+    }
+
+    td {
+        @apply text-xs text-center p-1 border text-p-gray font-['Helvetica']
+    }
+
+    td>i {
+        @apply p-0
+    }
+
+    td>b {
+        @apply p-0
+    }
+
+
+    li,
+    b,
+    i {
+        @apply lg:text-sm md:text-xs sm:text-xs text-xs text-justify font-['Helvetica']
+    }
+
+    b {
+        @apply lg:text-sm md:text-xs sm:text-xs text-xs text-justify font-['Helvetica']
+    }
+
+    .website-p>li,
+    i {
+        @apply lg:text-sm md:text-xs sm:text-xs text-xs text-justify font-['Helvetica']
+    }
+
+    .website-p>ol,
+    ul li,
+    i {
+        @apply lg:text-sm md:text-xs sm:text-xs text-xs text-justify
+    }
+
+    .csl-entry {
+        @apply font-['Helvetica']
+    }
+
+    .glass-dark {
+        @apply h-full w-full bg-gradient-to-br from-main-dark to-main rounded-md bg-clip-padding backdrop-filter bg-opacity-30 border text-white font-Helvetica text-sm hover:text-white
+    }
+
+    .glass-main {
+        @apply h-full w-full bg-gradient-to-br from-main to-main-dark rounded-md bg-clip-padding backdrop-filter bg-opacity-70 border text-off font-Helvetica text-sm hover:text-off
+    }
 }
 
-@font-face {
-    font-family: 'Gentium-I';
-    src: local('GentiumPlus-I'), url(fonts/GentiumPlus/GentiumPlus-I.woff) format('woff');
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Helvetica', sans-serif;
 }
 
-@font-face {
-    font-family: 'Assistant';
-    src: local('Assistant'), url(fonts/Assistant/Assistant-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'NotoDeva';
-    src: local('NotoDeva'), url(fonts/NotoSerifDevanagari/NotoSerifDevanagari.ttf) format('truetype');
-}
-
-
-
-/* GLOBAL STYLING */
-
-body {
-    overflow-y: scroll;
-    background-color: #fff;
+* {
+    font-family: 'Helvetica', sans-serif;
 }

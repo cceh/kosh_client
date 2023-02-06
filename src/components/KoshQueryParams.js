@@ -1,6 +1,5 @@
 import { React, useContext, useEffect } from "react"
 import KoshContext from "./KoshContext"
-import LanguageContext from "../Website/LanguageContext"
 import CustomSelect from "./CustomSelect"
 import CustomMultiSelect from "./CustomMultiSelect"
 import fetchKosh from "./fetchKosh"
@@ -62,8 +61,6 @@ const KoshQueryParams = () => {
 
     setLoading(false)
   }
-
-  const language = useContext(LanguageContext)
 
   const selectedField = (e) => {
     setField(e.target.value)
@@ -176,7 +173,7 @@ const KoshQueryParams = () => {
         <nav className="flex flex-row">
           <CustomMultiSelect
             fields={state.mpcd_ids}
-            label={language.language.lang === "english" ? "Dictionaries: " : "Wörterbücher: "}
+            label="Dictionaries: "
             preselected={dict_ids}
             onc={selectedDictIds}
           />
@@ -184,19 +181,19 @@ const KoshQueryParams = () => {
         <nav className="flex flex-row mt-4">
           <CustomSelect
             fields={search_fields}
-            label={language.language.lang === "english" ? "Field: " : "Anfragefeld: "}
+            label="Field: "
             preselected={selected_field}
             onc={selectedField}
           />
           <CustomSelect
             fields={query_types}
-            label={language.language.lang === "english" ? "Query Type: " : "Anfragetyp: "}
+            label="Query Type: "
             preselected={query_type}
             onc={selectedQueryType}
           />
           <CustomSelect
             fields={state.search.query_sizes}
-            label={language.language.lang === "english" ? "Query Size: " : "Anfrageumfang: "}
+            label="Query Size: "
             preselected={query_size}
             onc={selectedQuerySize}
           />
@@ -208,12 +205,12 @@ const KoshQueryParams = () => {
             autoComplete="query"
             type="text"
             className="sticky outline outline-1 outline-slate-400 rounded focus:border-blue-500 focus:ring focus:outline-none"
-            placeholder={language.language.lang === "english" ? "Search for..." : "Suche nach..."}
+            placeholder="Search for..."
             onChange={selectedQuery}
           />
           <input
             type="submit"
-            value={language.language.lang === "english" ? "Search" : "Suchen"}
+            value="Search"
             onClick={submitQuery}
             className="ml-2 outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
           />

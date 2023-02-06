@@ -1,19 +1,12 @@
 import React from "react";
-import {view} from "@risingstack/react-easy-state";
-import {withRouter} from 'react-router-dom';
 import KoshView from "./components/KoshView";
 
-
-class App extends React.Component {
-
-
-    render() {
-        return (
-            <div id="app">
-                <KoshView/>
-            </div>
-        );
-    }
+const App = () => {
+    return (
+        <div className="w-full h-full flex flex-col overflow-y-scroll scrollbar-thumb-off scrollbar-thin scrollbar-track-main-dark">
+            <KoshView />
+        </div>
+    );
 }
 
-export default withRouter(view(App));
+export default App;

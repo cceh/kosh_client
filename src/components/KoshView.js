@@ -1,13 +1,11 @@
 import { React, useContext, useState } from "react"
 import KoshContext from "./KoshContext"
-import LanguageContext from "../Website/LanguageContext"
 import KoshQueryParams from "./KoshQueryParams"
 import KoshResultParams from "./KoshResultParams"
 import KoshResultRender from "./KoshResultRender"
 
 const KoshView = () => {
   const state = useContext(KoshContext)
-  const language = useContext(LanguageContext)
   state.dict_collection.dict_id = state.mpcd_ids
   
   const base_url = "https://kosh.uni-koeln.de/"
@@ -54,14 +52,13 @@ const KoshView = () => {
 
   return (
     <KoshContext.Provider value={value}>
-      <LanguageContext.Provider value={language}>
         <div id="container">
           <div className="mr-4 ml-4 bg-slate-50 mt-4">
             <KoshQueryParams />
           </div>
           <div className="mr-4 ml-4 bg-slate-50 mt-4">
             <div className="flex flex-row m-2 pt-2">
-              <h5 className="font-bold text-lg">{language.language.lang === "english" ? "Search Results" : "Suchergebnisse"}</h5>
+              <h5 className="font-bold text-lg">Search Results</h5>
             </div>
             <KoshResultParams />
           </div>
@@ -69,7 +66,6 @@ const KoshView = () => {
             <KoshResultRender />
           </div>
         </div>
-      </LanguageContext.Provider>
     </KoshContext.Provider>
   )
 }

@@ -1,11 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "./styles.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router} from 'react-router-dom'
+import React from 'react';
+import './index.css';
+import App from './App';
+import { hydrate, render } from 'react-dom';
+
+const APP = (
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<Router basename={process.env.PUBLIC_URL}>
-    <App/>
-</Router>, rootElement);
+if (rootElement.hasChildNodes()) {
+    hydrate(APP, rootElement);
+}
+else {
+    render(APP, rootElement);
+}
+
