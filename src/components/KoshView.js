@@ -7,7 +7,7 @@ import KoshResultRender from "./KoshResultRender"
 const KoshView = () => {
   const state = useContext(KoshContext)
   state.dict_collection.dict_id = state.mpcd_ids
-  
+
   const base_url = "https://kosh.uni-koeln.de/"
   const spec_url = base_url + state.dict_collection.base_path + `/mmp/graphql`
   const [dict_base_url, setDictBaseUrl] = useState(state.dict_collection.dict_base_url)
@@ -16,7 +16,7 @@ const KoshView = () => {
   const [dict_fields, setDictFields] = useState(state.dict_collection.dict_fields)
   const [selected_field, setField] = useState(state.search.field)
   const [search_fields, setFields] = useState(state.search.fields)
-  
+
   const [query_types, setQueryTypes] = useState(state.search.query_types)
   const [query_type, setQueryType] = useState(state.search.query_type)
   const [query_size, setQuerySize] = useState(state.search.query_size)
@@ -52,20 +52,28 @@ const KoshView = () => {
 
   return (
     <KoshContext.Provider value={value}>
-        <div id="container">
-          <div className="mr-4 ml-4 bg-slate-50 mt-4">
-            <KoshQueryParams />
-          </div>
-          <div className="mr-4 ml-4 bg-slate-50 mt-4">
-            <div className="flex flex-row m-2 pt-2">
-              <h5 className="font-bold text-lg">Search Results</h5>
+      <div id="container">
+        <div className="mr-4 ml-4 bg-slate-50 mt-4">
+          <div className="flex flex-row">
+            <div className="flex flex-col flex-wrap pt-2 w-full">
+              <a href="https://kosh.uni-koeln.de" className="inline-flex items-center">
+                <img src="/kosh.png"alt="kosh-logo" width="60px" height="60px" className="mr-4 ml-2" />
+                Kosh - APIs for Lexical Data
+              </a>
             </div>
-            <KoshResultParams />
           </div>
-          <div className="flex flex-row mt-6">
-            <KoshResultRender />
-          </div>
+          <KoshQueryParams />
         </div>
+        <div className="mr-4 ml-4 bg-slate-50 mt-4">
+          <div className="flex flex-row m-2 pt-2">
+            <h5 className="font-bold text-lg">Search Results</h5>
+          </div>
+          <KoshResultParams />
+        </div>
+        <div className="flex flex-row mt-6">
+          <KoshResultRender />
+        </div>
+      </div>
     </KoshContext.Provider>
   )
 }
