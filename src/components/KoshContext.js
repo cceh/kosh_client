@@ -2,7 +2,7 @@ import { createContext } from "react"
 
 const stateStore = {
 
-  mpcd_ids: ["awn", "cpd", "dmx", "gbd", "gpv", "lfv", "mmp", "nmp", "pyv", "sns", "wz"],
+  mpcd_ids: ["awn", "cpd", "dmx", "gbd", "gpv", "lfv", "mmp", "nmp", "pyv", "sns", "wz", "dk5", "wdpw"],
 
   search: {
     entries: {},
