@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navbar } from 'react-bootstrap'
 import stateStore from '../stateStore'
-import {view} from "@risingstack/react-easy-state";
-import {withRouter} from 'react-router-dom';
+import { view } from "@risingstack/react-easy-state";
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 import CustomMultiselect from './CustomMultiselect';
@@ -24,50 +24,43 @@ class MainSearchSettings extends React.Component {
 
     componentDidMount() {
         this.setMultiSpec()
-        this.setSpec()
     }
 
-    setMultiSpec() {
+    async setMultiSpec() {
         let base_url = 'https://kosh.uni-koeln.de/'
-        stateStore.dict_collection.dict_ids.map((id)=>
-            {
-                const spec_url = base_url + stateStore.dict_collection.base_path + `/` + id + `/restful/spec`;
-                console.info(spec_url)
-                axios.get(spec_url).then(resp => {
-                    console.log(resp.data)
-                    stateStore.search.fields = [...new Set([...stateStore.search.fields,...resp.data['paths']['/entries']['get']['parameters'][0]['enum']])]
-                    console.log(stateStore.search.fields)
-                }).catch((error) => {
-                    console.warn('error fetching spec');
-                    console.error(error)
-                })
-            }
-        )
-    }
 
-    setSpec() {
-        stateStore.search.fields = stateStore.search.fields.filter(item => item !== 'created')
-        let temp = ['trc'];
+        // Fetch all available specs
+        for (let id in stateStore.dict_collection.dict_ids) {
+            const spec_url = base_url + stateStore.dict_collection.base_path + `/` + stateStore.dict_collection.dict_ids[id] + `/restful/spec`;
 
-        for(var i in stateStore.search.fields){
-            if(stateStore.search.fields[i] !== 'trc'){
-                temp.push(stateStore.search.fields[i])
-            }
+            const [fields, query_types] = await axios.get(spec_url).then(response => {
+                const resp = response.data
+                return [
+                    resp['paths']['/entries']['get']['parameters'][0]['enum'], 
+                    resp['paths']['/entries']['get']['parameters'][2]['enum']
+                ]
+            }).catch((error) => {
+                console.warn('error fetching spec');
+                console.error(error)
+            })
+
+            // Set available fields
+            fields.forEach(field => {
+                if (!stateStore.search.fields.includes(field) && field !== "created") {
+                    stateStore.search.fields.push(field)
+                }
+            })
+
+            // Set available query types
+            query_types.forEach(type => {
+                if (!stateStore.search.query_types.includes(type)) {
+                    stateStore.search.query_types.push(type)
+                }
+            })
         }
 
-            // set default fields to be displayed
-            stateStore.results.display_fields = this.initFields(temp)
-            stateStore.results.display_fields['xml'] = false
-            stateStore.results.display_fields['id'] = false
-            // stateStore.search.query_types = stateStore.dict_spec.raw['paths']['/entries']['get']['parameters'][2]['enum'];
-    }
-
-    initFields(fields) {
-        var obj = {}
-        for (let i = 0; i < fields.length; ++i) {
-            obj[fields[i]] = true;
-        }
-        return obj
+        // Set default fields to be displayed as key-value pairs ([id]: true)
+        stateStore.results.display_fields = Object.assign({}, ...stateStore.search.fields.map(field => ((field === "id" || field === "xml") ? { [field]: false } : { [field]: true })))
     }
 
     /*
@@ -89,9 +82,9 @@ class MainSearchSettings extends React.Component {
     setDictId = e => {
         stateStore.dict_collection.dict_id = e.target.value
         console.log(stateStore.dict_collection.dict_id)
-        stateStore.search.field = "trc";
+        stateStore.search.field = "trc"
         stateStore.search.query_type = "wildcard"
-        this.setSpec()
+        this.setMultiSpec()
 
     };
 
@@ -111,32 +104,31 @@ class MainSearchSettings extends React.Component {
     }
 
     selectedOptions = (e) => {
-        if (e.target.checked){
+        if (e.target.checked) {
             stateStore.dict_collection.dict_id.push(e.target.id)
         }
-        else
-        {
-            stateStore.dict_collection.dict_id.splice(stateStore.dict_collection.dict_id.indexOf(e.target.id),1)
+        else {
+            stateStore.dict_collection.dict_id.splice(stateStore.dict_collection.dict_id.indexOf(e.target.id), 1)
         }
     }
-// <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
+    // <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_id} onc={this.selectedOptions}/>
     render() {
         return (
             <>
-            <Navbar expand="lg" sticky="top" className="bg-light">
-            <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_ids} onc={this.selectedOptions}/>
-            </Navbar>
-            <Navbar expand="lg" sticky="top" className="bg-light">
-                <CustomSelect list={stateStore.search.fields}
-                    onc={this.setField}
-                    label={"Field: "} preselected={stateStore.search.field} />
-                <CustomSelect
-                    list={stateStore.search.query_types} onc={this.setQueryType}
-                    label={"Query Type: "} preselected={stateStore.search.query_type} />
-                <CustomSelect
-                    list={stateStore.search.query_sizes} onc={this.setQuerySize}
-                    label={"Query Size: "} preselected={stateStore.search.query_size} />
-            </Navbar>
+                <Navbar expand="lg" sticky="top" className="bg-light">
+                    <CustomMultiselect labels={stateStore.mpcd_ids} preselected={stateStore.dict_collection.dict_ids} onc={this.selectedOptions} />
+                </Navbar>
+                <Navbar expand="lg" sticky="top" className="bg-light">
+                    <CustomSelect list={stateStore.search.fields}
+                        onc={this.setField}
+                        label={"Field: "} preselected={stateStore.search.field} />
+                    <CustomSelect
+                        list={stateStore.search.query_types} onc={this.setQueryType}
+                        label={"Query Type: "} preselected={stateStore.search.query_type} />
+                    <CustomSelect
+                        list={stateStore.search.query_sizes} onc={this.setQuerySize}
+                        label={"Query Size: "} preselected={stateStore.search.query_size} />
+                </Navbar>
             </>
         )
     }
