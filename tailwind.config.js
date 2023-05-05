@@ -4,7 +4,6 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-
     extend: {
       colors: {
         'main': '#013561',
@@ -21,9 +20,6 @@ module.exports = {
         'smartphone': { 'max': '639px' },
         'smartphone-xs': { 'max': '430px' }
       },
-      fontFamily: {
-        'Helvetica': 'Helvetica, sans'
-      },
       rotate: {
         '270': '270deg',
       },
@@ -32,7 +28,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar')
-  ],
 }
