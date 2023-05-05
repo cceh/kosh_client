@@ -1,6 +1,4 @@
-import React from "react"
-
-const CustomCheckbox = ({ fields, label, preselected, onc }) => {
+const DisplaySelect = ({ fields, label, preselected, onc }) => {
   if (!fields.length) {
     return null;
   }
@@ -28,4 +26,4 @@ const CustomCheckbox = ({ fields, label, preselected, onc }) => {
   );
 }
 
-export default CustomCheckbox;
+export default DisplaySelect;

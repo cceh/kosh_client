@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Spinner = () => {
   return (
     <div className='flex flex-row justify-evenly my-1'>

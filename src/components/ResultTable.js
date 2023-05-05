@@ -1,6 +1,4 @@
-import React from "react"
-
-const CustomTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
+const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
   if (!results?.length) {
     return null
   }
@@ -127,4 +125,4 @@ const CustomTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
   )
 }
 
-export default CustomTable
+export default ResultTable

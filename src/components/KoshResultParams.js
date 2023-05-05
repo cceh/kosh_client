@@ -1,6 +1,6 @@
-import { React, useContext } from "react"
+import { useContext } from "react"
 import KoshContext from "./KoshContext"
-import CustomCheckbox from "./CustomCheckbox"
+import DisplaySelect from "./DisplaySelect"
 import Spinner from "./Spinner"
 
 const KoshResultParams = () => {
@@ -22,7 +22,7 @@ const KoshResultParams = () => {
     <div className="flex flex-row m-2 justify-between pb-2">
       <div className="flex flex-col">
         {loading ? <Spinner /> :
-          <CustomCheckbox
+          <DisplaySelect
             fields={search_fields}
             label="Display fields: "
             preselected={isChecked}

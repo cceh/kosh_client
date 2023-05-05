@@ -1,6 +1,4 @@
-import React from "react"
-
-const CustomSelect = ({ fields, label, preselected, onc }) => {
+const Dropdown = ({ fields, label, preselected, onc }) => {
   if (!fields.length) {
     return null;
   }
@@ -26,4 +24,4 @@ const CustomSelect = ({ fields, label, preselected, onc }) => {
   );
 }
 
-export default CustomSelect;
+export default Dropdown;

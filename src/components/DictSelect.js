@@ -1,6 +1,4 @@
-import React from "react"
-
-const CustomMultiSelect = ({ fields, label, preselected, onc }) => {
+const DictSelect = ({ fields, label, preselected, onc }) => {
   if (!fields.length) {
     return null;
   }
@@ -25,4 +23,4 @@ const CustomMultiSelect = ({ fields, label, preselected, onc }) => {
   )
 }
 
-export default CustomMultiSelect
+export default DictSelect

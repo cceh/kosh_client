@@ -1,7 +1,7 @@
-import { React, useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import KoshContext from "./KoshContext"
-import CustomSelect from "./CustomSelect"
-import CustomMultiSelect from "./CustomMultiSelect"
+import Dropdown from "./Dropdown"
+import DictSelect from "./DictSelect"
 import fetchKosh from "./fetchKosh"
 
 const KoshQueryParams = () => {
@@ -171,7 +171,7 @@ const KoshQueryParams = () => {
     <div className="flex flex-row pt-2">
       <div className="flex flex-col flex-wrap px-1 m-2">
         <nav className="flex flex-row">
-          <CustomMultiSelect
+          <DictSelect
             fields={state.mpcd_ids}
             label="Dictionaries: "
             preselected={dict_ids}
@@ -179,19 +179,19 @@ const KoshQueryParams = () => {
           />
         </nav>
         <nav className="flex flex-row mt-4">
-          <CustomSelect
+          <Dropdown
             fields={search_fields}
             label="Field: "
             preselected={selected_field}
             onc={selectedField}
           />
-          <CustomSelect
+          <Dropdown
             fields={query_types}
             label="Query Type: "
             preselected={query_type}
             onc={selectedQueryType}
           />
-          <CustomSelect
+          <Dropdown
             fields={state.search.query_sizes}
             label="Query Size: "
             preselected={query_size}

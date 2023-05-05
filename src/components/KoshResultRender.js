@@ -1,6 +1,6 @@
-import { React, useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import KoshContext from "./KoshContext"
-import CustomTable from "./CustomTable"
+import ResultTable from "./ResultTable"
 import Spinner from "./Spinner"
 
 const KoshResultRender = () => {
@@ -25,7 +25,7 @@ const KoshResultRender = () => {
       if (emptyTable) { return null }
 
       return (
-        <CustomTable key={"table_" + key} dict={key} fields={available_fields} dict_fields={dict_fields} results={results[key]} dict_base_url={dict_base_url}></CustomTable>
+        <ResultTable key={"table_" + key} dict={key} fields={available_fields} dict_fields={dict_fields} results={results[key]} dict_base_url={dict_base_url}></ResultTable>
       )
     } else { return null }
   })
