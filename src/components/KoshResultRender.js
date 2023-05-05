@@ -15,8 +15,8 @@ const KoshResultRender = () => {
       // Check if there are any results for the available fields
       const emptyTable = results[key].map(result => {
         // Remove any null values
-        Object.keys(result).forEach((field) => result[field] == null && delete result[field])
-
+        Object.keys(result).forEach((field) => (result[field] == null || result[field] === "NNN") && delete result[field])
+ 
         return available_fields.filter(field => Object.keys(result).includes(field))
       }).every(entry => entry.length === 0)
 

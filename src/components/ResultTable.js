@@ -7,7 +7,7 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
     return (
       <th
         scope="col"
-        className="text-sm text-center text-gray-900 px-6 py-4 text-left"
+        className="text-sm text-center text-black p-4"
         key={"header_" + field}>
         {field}
       </th>
@@ -16,20 +16,13 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
 
   const tableBody = results.map(result => {
     // For each result, return row
+    // The row should only contain the results of the selected display fields
     const row = fields.map((field, id) => {
-      // The row should only contain the results of the selected display fields
-      if (!result[field]) {
+      // If result is an array, display as list
+      if (Array.isArray(result[field]) && result[field].length > 1) {
         return (
           <td
-            className="text-sm text-gray-900 font-light w-32"
-            key={"entry_" + id + "_" + field}>
-            &nbsp;
-          </td>)
-      }
-      else if (Array.isArray(result[field]) && result[field].length > 1) {
-        return (
-          <td
-            className="text-sm text-gray-900 font-light w-32"
+            className="text-base text-black text-center"
             key={"entry_" + id + field}>
             <ul className="list-disc px-6">
               {result[field].map((item, id) => (
@@ -43,9 +36,9 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
         // TODO: Add line wrapping and syntax highlighting
         return (
           <td
-            className="text-sm text-gray-900 font-light w-32"
+            className="text-sm text-black w-64 p-2 text-left"
             key={"entry_" + id + "_" + field}>
-            <pre className="whitespace-pre-line">
+            <pre className="whitespace-pre-line bg-slate-50">
               <code>
                 {result[field]}
               </code>
@@ -57,7 +50,7 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
         const url = dict_base_url[dict] + `?query={ids(ids: "${result["id"]}"){${dict_fields[dict]}}}`
         return (
           <td
-            className="text-sm text-gray-900 font-light w-32"
+            className="text-blue-600 hover:text-blue-800 dark:text-blue-500 hover:underline w-24 break-all text-base"
             key={"entry_" + id + "_" + field}>
             <a href={url}>{result[field]}</a>
           </td>
@@ -67,21 +60,30 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
         var items = []
         if (typeof (result[field]) === typeof ("")) {
           items = result[field].split("$$$").map((line, id) => {
-            return (<li key={"list-item_" + field + "_" + id}>{line}</li>)
+            return (<li key={"list-item_" + field + "_" + id} className="text-base">{line}</li>)
           })
         }
         return (
           <td
-            className="text-sm text-gray-900 font-light w-32"
+            className="text-black w-80"
             key={"entry_" + id + "_" + field}>
             <ul className="list-disc px-6">{items}</ul>
           </td>
         )
       }
+      // If result for field is empty, return non-breaking space
+      else if (!result[field]) {
+        return (
+          <td
+            className="w-48"
+            key={"entry_" + id + "_" + field}>
+            &nbsp;
+          </td>)
+      }
       else {
         return (
           <td
-            className="text-sm text-gray-900 font-light w-32"
+            className="text-base text-left text-black w-48 px-2 break-normal"
             key={"entry_" + id + "_" + field}>
             {result[field]}
           </td>
@@ -91,7 +93,7 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
 
     return (
       <tr
-        className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+        className="bg-white text-black text-base border-2 hover:bg-slate-100"
         key={"row_" + result["id"]}>
         {row}
       </tr>
@@ -101,16 +103,16 @@ const ResultTable = ({ dict, fields, dict_fields, results, dict_base_url }) => {
   return (
     <div className="flex flex-row">
       <div className="flex flex-col">
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="sm:-mx-6 lg:-mx-8">
           <div className="ml-4 mr-4 inline-block sm:px-6 lg:px-8">
-            <table className="w-screen">
-              <thead className="bg-white border-b">
+            <table className="max-w-screen border-separate border-spacing-0">
+              <thead className="bg-white top-0 sticky">
                 <tr>
-                  <th colSpan="100%" className="text-black text-sm">
+                  <th colSpan="100%" className="text-black text-sm bg-slate-200">
                     {dict}
                   </th>
                 </tr>
-                <tr>
+                <tr className="bg-slate-100 shadow">
                   {tableHead}
                 </tr>
               </thead>
