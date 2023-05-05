@@ -111,7 +111,6 @@ const KoshQueryParams = () => {
 
   useEffect(() => {
     setLoading(true)
-    let isMounted = true
     let available_fields = []
 
     // Get available search and display fields for all dictionaries
@@ -138,7 +137,12 @@ const KoshQueryParams = () => {
 
         // Fields which are available in the search and as columns in the table
         setFields(available_fields)
-        setDisplayFields(Object.assign({}, ...available_fields.map(field => ((field === "id" || field === "xml") ? { [field]: false } : { [field]: true }))))
+        setDisplayFields(Object.assign({},
+          ...available_fields.map(field => ((field === "id" || field === "xml") ?
+            { [field]: false } :
+            { [field]: true }))
+        ))
+
         // Fields available per dictionary
         setDictFields(prevFields => ({
           ...prevFields,
@@ -147,24 +151,13 @@ const KoshQueryParams = () => {
       })
     }
 
-    // Get all available query types
-    fetchKosh(spec_url, `
-      query QueryTypesQuery {
-            __type(name: "querytypes") {
-              enumValues {
-                name
-              }
-            }
-          }
-    `).then(response => {
-      if (!isMounted) { return }
-      const res = response.data
-      const types = res["__type"]["enumValues"].map(i => i.name)
-      setQueryTypes(types)
-    })
+    // Get all available query types, should be the same across all dictionaries!
+    fetch(base_url + state.dict_collection.base_path)
+      .then(response => response.json())
+      .then(data => setQueryTypes(data.dicts[Object.keys(data.dicts)[0]].query_types))
+      .catch(error => console.error(error))
 
     setLoading(false)
-    return () => { isMounted = false }
   }, [base_url, state.dict_collection.base_path, state.mpcd_ids, setDictFields, spec_url, setFields, setQueryTypes, setLoading, setDisplayFields])
 
   return (
