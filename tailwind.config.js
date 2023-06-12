@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         'main': '#013561',
-        'main-dark': '#011E38',
+        'dark': '#343a40',
         'off': '#95c11f',
         'off-dark': '#526B16',
         'action': '#DB6C00',

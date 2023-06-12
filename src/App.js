@@ -1,9 +1,7 @@
-import KoshView from "./components/KoshView"
+import View from "./components/View";
 
 const App = () => {
-    return (
-        <KoshView />
-    );
-}
+  return <View />;
+};
 
 export default App;
