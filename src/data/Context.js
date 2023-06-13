@@ -14,7 +14,7 @@ const stateStore = {
     value: "", // String that's been input by the user
     query: "", // Query URL
     dicts: [],
-    field: "id", // Active field to be searched
+    field: "lemma", // Active field to be searched
     query_type: "wildcard", // Active query type
     query_size: 20, // Active query size
     query_sizes: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], // All available query sizes

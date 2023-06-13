@@ -13,7 +13,7 @@ const View = () => {
   const [kosh_api, setAPIEndpoint] = useState(state.kosh_api);
 
   const [query_string, setQueryString] = useState(state.search.value);
-  const [query_dicts, setActiveDicts] = useState(state.search.dicts);
+  const [query_dicts, setQueryDicts] = useState(state.search.dicts);
   const [query_field, setQueryField] = useState(state.search.field);
   const [query_type, setQueryType] = useState(state.search.query_type);
   const [query_size, setQuerySize] = useState(state.search.query_size);
@@ -42,7 +42,7 @@ const View = () => {
     kosh_api,
     setAPIEndpoint,
     query_dicts,
-    setActiveDicts,
+    setQueryDicts,
     query_string,
     setQueryString,
     query_field,
@@ -87,9 +87,20 @@ const View = () => {
       setQueryTypes(flatten(types));
 
       setDictIds(dicts_by_name);
-      setActiveDicts(dicts_by_name.slice(0, 5));
+      setQueryDicts(dicts_by_name.slice(0, 5));
+
       setDictBaseURLs(
         Object.assign(...dicts_by_name.map((k, i) => ({ [k]: urls[i] })))
+      );
+
+      setDisplayFields(
+        Object.assign(
+          ...flatten(fields).map((field) =>
+            field === "id" || field === "xml"
+              ? { [field]: false }
+              : { [field]: true }
+          )
+        )
       );
     };
 
@@ -129,7 +140,7 @@ const View = () => {
         <div className="flex flex-row mt-6">
           <ResultRender />
         </div>
-        <div className="flex flex-row mt-6">
+        <div className="flex flex-row mt-6 fixed bottom-0">
           <Footer />
         </div>
       </div>

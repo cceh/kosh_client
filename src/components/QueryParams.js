@@ -19,7 +19,7 @@ const QueryParams = () => {
     query_size,
     query_string,
     dict_specs,
-    setActiveDicts,
+    setQueryDicts,
     setQueryField,
     setQueryType,
     setQuerySize,
@@ -30,9 +30,9 @@ const QueryParams = () => {
 
   const selectDicts = (e) => {
     if (!query_dicts.includes(e.target.id)) {
-      setActiveDicts((prevIds) => [...prevIds, e.target.id]);
+      setQueryDicts((prevIds) => [...prevIds, e.target.id]);
     } else {
-      setActiveDicts((prevIds) => prevIds.filter((id) => id !== e.target.id));
+      setQueryDicts((prevIds) => prevIds.filter((id) => id !== e.target.id));
       setResults((prevResults) => ({
         ...prevResults,
         [e.target.id]: "",
@@ -122,12 +122,12 @@ const QueryParams = () => {
             placeholder="Search for..."
             onChange={selectQuery}
           />
-          <input
-            type="submit"
-            value="Search"
+          <button
             onClick={submitQuery}
             className="ml-2 outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
-          />
+          >
+            Search
+          </button>
         </div>
       </div>
     </div>

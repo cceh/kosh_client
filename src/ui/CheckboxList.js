@@ -1,9 +1,11 @@
+import sorted from "../utils/sorted";
+
 const CheckboxList = ({ label, items, preselected, onChange }) => {
   if (!items.length) {
     return null;
   }
 
-  const checkboxList = items.map((item) => (
+  const checkboxList = sorted(items).map((item) => (
     <div key={"checkbox_" + item}>
       <input
         id={item}
