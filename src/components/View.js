@@ -112,22 +112,20 @@ const View = () => {
     <Context.Provider value={value}>
       <div id="container">
         <div className="mr-4 ml-4 bg-slate-50 mt-4">
-          <div className="flex flex-row">
-            <div className="flex flex-col flex-wrap pt-2 w-screen">
-              <a
-                href="https://kosh.uni-koeln.de"
-                className="inline-flex items-center"
-              >
-                <img
-                  src="/kosh.png"
-                  alt="kosh-logo"
-                  width="60px"
-                  height="60px"
-                  className="mr-4 ml-2"
-                />
-                Kosh - APIs for Lexical Data
-              </a>
-            </div>
+          <div className="flex flex-col flex-wrap pt-2">
+            <a
+              href="https://kosh.uni-koeln.de"
+              className="inline-flex items-center"
+            >
+              <img
+                src="/kosh.png"
+                alt="kosh-logo"
+                width="60px"
+                height="60px"
+                className="mr-4 ml-2"
+              />
+              Kosh - APIs for Lexical Data
+            </a>
           </div>
           <QueryParams />
         </div>
@@ -137,10 +135,10 @@ const View = () => {
           </div>
           <ResultParams />
         </div>
-        <div className="flex flex-row mt-6">
+        <div className="mr-4 ml-4 mt-4">
           <ResultRender />
         </div>
-        <div className="flex flex-row mt-6 fixed bottom-0">
+        <div className="mt-4 fixed bottom-0 w-full">
           <Footer />
         </div>
       </div>

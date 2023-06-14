@@ -55,6 +55,7 @@ const QueryParams = () => {
   const selectQuery = (e) => {
     if (e.target.value !== "") {
       setQueryString(e.target.value);
+      submitQuery()
     } else {
       setQueryString("");
     }

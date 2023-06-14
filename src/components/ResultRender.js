@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NoResultsCallout, EmptyQueryStringCallout } from "../ui/Callouts";
 import Context from "../data/Context";
 import Spinner from "../ui/Spinner";
 import Table from "../ui/Table";
+import ToTopButton from "../ui/ToTopButton";
 
 const ResultRender = () => {
   const { query_string, display_fields, loading, results } =
     useContext(Context);
+  const [scroll, setShowTopBtn] = useState(false);
+
   const available_fields = Object.keys(display_fields).filter(
     (key) => display_fields[key] === true
   );
@@ -35,15 +38,25 @@ const ResultRender = () => {
         return (
           <Table
             key={"table_" + key}
-            dict={key}
+            label={key}
             fields={available_fields}
             items={results[key]}
-          ></Table>
+          />
         );
       } else {
         return null;
       }
     });
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 600) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    });
+  });
 
   if (query_string === "") {
     return <EmptyQueryStringCallout />;
@@ -58,13 +71,12 @@ const ResultRender = () => {
     return <NoResultsCallout />;
   }
 
-  // Add ToTopButton functionality
   return (
     <div className="flex flex-row">
       <div className="flex flex-col">
         {loading ? <Spinner /> : <ViewList />}
       </div>
-      {/* {scroll ? <ToTopButton /> : null} */}
+      <div className="flex flex-col">{scroll ? <ToTopButton /> : null}</div>
     </div>
   );
 };

@@ -20,7 +20,7 @@ const ResultParams = () => {
   };
 
   return (
-    <div className="flex flex-row m-2 justify-between pb-2">
+    <div className="flex flex-row m-2 justify-between pb-2 flex-wrap">
       <div className="flex flex-col">
         {loading ? (
           <Spinner />

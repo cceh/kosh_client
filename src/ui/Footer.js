@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="bg-dark p-6 w-screen">
-      <div className="grid grid-cols-3 content-center">
-        <div className="mb-2 lg:mb-0">
+    <footer className="bg-dark py-6 flex flex-row items-center justify-center">
+      <div className="grid grid-flow-col auto-cols-max">
+        <div className="w-64 mb-2 lg:mb-0">
           <a
             href="https://uni-koeln.de"
             target="_blank"
@@ -15,7 +15,7 @@ const Footer = () => {
             />
           </a>
         </div>
-        <div className="mb-2 lg:mb-0">
+        <div className="w-64 mb-2 lg:mb-0">
           <a
             href="https://cceh.uni-koeln.de"
             target="_blank"
@@ -28,7 +28,7 @@ const Footer = () => {
             />
           </a>
         </div>
-        <div className="mb-2 lg:mb-0">
+        <div className="w-64 mb-2 lg:mb-0">
           <a
             href="https://dch.uni-koeln.de"
             target="_blank"

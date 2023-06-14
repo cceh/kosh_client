@@ -37,7 +37,7 @@ const ResultTable = ({ label, items, fields }) => {
         // TODO: Add line wrapping and syntax highlighting
         return (
           <td
-            className="text-sm text-black w-64 p-2 text-left"
+            className="text-sm text-black p-2 text-left"
             key={"entry_" + id + "_" + field}
           >
             <pre className="whitespace-pre-line bg-slate-50">
@@ -46,21 +46,17 @@ const ResultTable = ({ label, items, fields }) => {
           </td>
         );
       } else if (!result[field]) {
-        return (
-          <td className="w-48" key={"entry_" + id + "_" + field}>
-            &nbsp;
-          </td>
-        );
-      } else {
-        return (
-          <td
-            className="text-base text-left text-black w-48 px-2 break-normal"
-            key={"entry_" + id + "_" + field}
-          >
-            {result[field]}
-          </td>
-        );
+        return <td key={"entry_" + id + "_" + field}></td>;
       }
+
+      return (
+        <td
+          className="text-base text-left text-black px-2 break-normal"
+          key={"entry_" + id + "_" + field}
+        >
+          {result[field]}
+        </td>
+      );
     });
 
     return (
@@ -74,28 +70,17 @@ const ResultTable = ({ label, items, fields }) => {
   });
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col">
-        <div className="sm:-mx-6 lg:-mx-8">
-          <div className="ml-4 mr-4 inline-block sm:px-6 lg:px-8">
-            <table className="max-w-screen border-separate border-spacing-0">
-              <thead className="bg-white top-0 sticky">
-                <tr>
-                  <th
-                    colSpan="100%"
-                    className="text-black text-sm bg-slate-200"
-                  >
-                    {label}
-                  </th>
-                </tr>
-                <tr className="bg-slate-100 shadow">{tableHead}</tr>
-              </thead>
-              <tbody>{tableBody}</tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table className="table-auto border-separate border-spacing-0 w-screen max-w-screen">
+      <thead className="bg-white top-0 sticky">
+        <tr>
+          <th colSpan="100%" className="text-black text-sm bg-slate-200">
+            {label}
+          </th>
+        </tr>
+        <tr className="bg-slate-100 shadow">{tableHead}</tr>
+      </thead>
+      <tbody>{tableBody}</tbody>
+    </table>
   );
 };
 
