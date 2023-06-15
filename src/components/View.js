@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import kosh_logo from "../assets/logo_kosh_color.png"
 import flatten from "../utils/flatten";
 import fetchSpec from "../utils/fetchSpec";
 import Context from "../data/Context";
@@ -118,7 +119,7 @@ const View = () => {
               className="inline-flex items-center"
             >
               <img
-                src="/kosh.png"
+                src={kosh_logo}
                 alt="kosh-logo"
                 width="60px"
                 height="60px"

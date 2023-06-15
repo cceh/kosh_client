@@ -1,3 +1,7 @@
+import uzk_logo from "../assets/logo_uzk_weiss.png"
+import cceh_logo from "../assets/logo_cceh_weiss.png"
+import dch_logo from "../assets/logo_dch_weiss.png"
+
 const Footer = () => {
   return (
     <footer className="bg-dark py-6 flex flex-row items-center justify-center">
@@ -9,7 +13,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <img
-              src="logo_uzk_weiss.png"
+              src={uzk_logo}
               width="70px"
               alt="Logo University of Cologne"
             />
@@ -22,7 +26,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <img
-              src="logo_cceh_weiss.png"
+              src={cceh_logo}
               width="70px"
               alt="Logo Cologne Center for"
             />
@@ -35,7 +39,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <img
-              src="logo_dch_weiss.png"
+              src={dch_logo}
               width="100px"
               className="d-inline-block align-top"
               alt=""
