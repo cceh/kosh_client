@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import kosh_logo from "../assets/logo_kosh_color.png"
+import kosh_logo from "../assets/logo_kosh_color.png";
 import flatten from "../utils/flatten";
 import fetchSpec from "../utils/fetchSpec";
 import Context from "../data/Context";
@@ -31,6 +31,7 @@ const View = () => {
   const [dict_base_urls, setDictBaseURLs] = useState(
     state.collection.dict_base_urls
   );
+  const exclude = state.collection.exclude;
 
   const [display_fields, setDisplayFields] = useState(
     state.results.display_fields
@@ -81,6 +82,11 @@ const View = () => {
 
     const setSpec = async () => {
       const [dicts, fields, types, urls] = await fetchSpec(endpoint);
+
+      exclude.forEach((dict) => {
+        delete dicts[dict];
+      });
+
       const dicts_by_name = Object.keys(dicts);
 
       setAvailableDicts(dicts);

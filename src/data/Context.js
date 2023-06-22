@@ -3,11 +3,13 @@ import { createContext } from "react";
 const stateStore = {
   kosh_api: "https://kosh.uni-koeln.de", // API base url
   collection_ids: [
+    "CDSD",
+    "Creole",
     "Freedict",
     "Kosh Data",
+    "MPCD",
     "C-SALT Sanskrit",
-    "Creole",
-    "CDSD",
+    "localhost",
   ],
 
   search: {
@@ -21,13 +23,14 @@ const stateStore = {
   },
 
   collection: {
-    id: "Kosh Data",
+    id: "mpcd",
     base_path: "api", // Default collection to search
     dicts: [],
     dict_base_urls: {}, // All base REST/GraphQL URLs for all dictionaries
     dict_ids: [], // All available dictionaries in collection
     dict_fields: {}, // All available fields for all dictionaries
     dict_types: [], // All available query types for all dictionaries
+    exclude: ["cpd", "mmp", "nmp"],
   },
 
   results: {

@@ -17,25 +17,33 @@ const CollectionSwitcher = () => {
     setCollectionId(uid);
 
     switch (uid) {
+      case "CDSD":
+        setAPIEndpoint(default_api);
+        setCollectionBasePath("cdsd");
+        break;
       case "Creole":
         setAPIEndpoint(default_api);
         setCollectionBasePath("creole");
-        break;
-      case "Kosh Data":
-        setAPIEndpoint(default_api);
-        setCollectionBasePath("api");
         break;
       case "Freedict":
         setAPIEndpoint(default_api);
         setCollectionBasePath("freedict");
         break;
-      case "CDSD":
+      case "Kosh Data":
         setAPIEndpoint(default_api);
-        setCollectionBasePath("cdsd");
+        setCollectionBasePath("api");
+        break;
+      case "MPCD":
+        setAPIEndpoint(default_api);
+        setCollectionBasePath("mpcd");
         break;
       case "C-SALT Sanskrit":
         setAPIEndpoint("https://api.c-salt.uni-koeln.de");
         setCollectionBasePath("dicts");
+        break;
+      case "localhost":
+        setAPIEndpoint("http://localhost:5000");
+        setCollectionBasePath("api");
         break;
       default:
         setAPIEndpoint("http://localhost:5000");
