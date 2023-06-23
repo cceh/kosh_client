@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import kosh_logo from "../assets/logo_kosh_color.png";
-import flatten from "../utils/flatten";
 import fetchSpec from "../utils/fetchSpec";
 import Context from "../data/Context";
 import Footer from "../ui/Footer";
@@ -78,42 +77,32 @@ const View = () => {
 
   useEffect(() => {
     const endpoint = kosh_api + "/" + collection_base_path;
-    setLoading(true);
 
     const setSpec = async () => {
+      setLoading(true);
+
       const [dicts, fields, types, urls] = await fetchSpec(endpoint);
 
       exclude.forEach((dict) => {
         delete dicts[dict];
       });
 
-      const dicts_by_name = Object.keys(dicts);
-
       setAvailableDicts(dicts);
-      setDictFields(flatten(fields));
-      setQueryTypes(flatten(types));
+      setDictFields(fields);
+      setQueryTypes(types);
 
+      const dicts_by_name = Object.keys(dicts);
       setDictIds(dicts_by_name);
-      setQueryDicts(dicts_by_name.slice(0, 5));
-
+      setQueryDicts(dicts_by_name.slice(0, 2));
       setDictBaseURLs(
         Object.assign(...dicts_by_name.map((k, i) => ({ [k]: urls[i] })))
       );
 
-      setDisplayFields(
-        Object.assign(
-          ...flatten(fields).map((field) =>
-            field === "id" || field === "xml"
-              ? { [field]: false }
-              : { [field]: true }
-          )
-        )
-      );
+      setLoading(false);
     };
 
     setSpec();
-    setLoading(false);
-  }, [kosh_api, collection_base_path]);
+  }, [kosh_api, collection_base_path, exclude]);
 
   return (
     <Context.Provider value={value}>

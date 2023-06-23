@@ -4,7 +4,11 @@ import Spinner from "../ui/Spinner";
 import CheckboxList from "../ui/CheckboxList";
 
 const ResultParams = () => {
-  const { loading, display_fields, setDisplayFields } = useContext(Context);
+  const {
+    loading,
+    display_fields,
+    setDisplayFields,
+  } = useContext(Context);
 
   const isChecked = () => {
     return Object.keys(display_fields).filter(
@@ -13,8 +17,8 @@ const ResultParams = () => {
   };
 
   const selectDisplayFields = (e) => {
-    setDisplayFields((prevTargets) => ({
-      ...prevTargets,
+    setDisplayFields((prevFields) => ({
+      ...prevFields,
       [e.target.id]: e.target.checked,
     }));
   };

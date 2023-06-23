@@ -28,7 +28,7 @@ const stateStore = {
     dicts: [],
     dict_base_urls: {}, // All base REST/GraphQL URLs for all dictionaries
     dict_ids: [], // All available dictionaries in collection
-    dict_fields: {}, // All available fields for all dictionaries
+    dict_fields: [], // All available fields for all dictionaries
     dict_types: [], // All available query types for all dictionaries
     exclude: ["cpd", "mmp", "nmp"],
   },

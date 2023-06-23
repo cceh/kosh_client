@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Context from "../data/Context";
+import flatten from "../utils/flatten";
 import fetchResults from "../utils/fetchResults";
 import Dropdown from "../ui/Dropdown";
 import CheckboxList from "../ui/CheckboxList";
@@ -7,6 +8,7 @@ import CollectionSwitcher from "./CollectionSwitcher";
 
 const QueryParams = () => {
   const {
+    loading,
     kosh_api,
     dict_base_urls,
     dict_ids,
@@ -24,9 +26,13 @@ const QueryParams = () => {
     setQueryType,
     setQuerySize,
     setQueryString,
+    setDictFields,
+    setDisplayFields,
     setLoading,
     setResults,
   } = useContext(Context);
+
+  const [available_fields, setAvailableFields] = useState({});
 
   const selectDicts = (e) => {
     if (!query_dicts.includes(e.target.id)) {
@@ -55,7 +61,7 @@ const QueryParams = () => {
   const selectQuery = (e) => {
     if (e.target.value !== "") {
       setQueryString(e.target.value);
-      submitQuery()
+      submitQuery();
     } else {
       setQueryString("");
     }
@@ -81,6 +87,26 @@ const QueryParams = () => {
     }
   };
 
+  useEffect(() => {
+    const fields = query_dicts
+      .filter((dict) => Object.hasOwn(dict_fields, dict))
+      .map((dict) => dict_fields[dict]);
+
+    if (!loading && fields.length > 0) {
+      setAvailableFields(flatten(Object.values(fields)));
+
+      setDisplayFields(
+        Object.assign(
+          ...flatten(fields).map((field) =>
+            field === "created" || field === "id" || field === "xml"
+              ? { [field]: false }
+              : { [field]: true }
+          )
+        )
+      );
+    }
+  }, [loading, query_dicts, dict_fields, setDictFields, setDisplayFields]);
+
   return (
     <div className="flex flex-row pt-2">
       <div className="flex flex-col flex-wrap px-1 m-2">
@@ -96,13 +122,13 @@ const QueryParams = () => {
         <nav className="flex flex-row mt-4">
           <Dropdown
             label="Field: "
-            items={dict_fields}
+            items={available_fields}
             preselected={query_field}
             onChange={selectField}
           />
           <Dropdown
             label="Query Type: "
-            items={dict_types}
+            items={dict_types ? flatten(Object.values(dict_types)) : {}}
             preselected={query_type}
             onChange={selectQueryType}
           />
