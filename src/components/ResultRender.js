@@ -3,7 +3,8 @@ import Context from "../data/Context";
 import { NoResultsCallout, EmptyQueryStringCallout } from "../ui/Callouts";
 import Spinner from "../ui/Spinner";
 import Table from "../ui/Table";
-import ToTopButton from "../ui/ToTopButton";
+import BackToTopBtn from "../ui/BackToTopBtn";
+
 
 const ResultRender = () => {
   const { query_string, display_fields, loading, results } =
@@ -73,7 +74,7 @@ const ResultRender = () => {
       <div className="flex flex-col w-full">
         {loading ? <Spinner /> : <ViewList />}
       </div>
-      <ToTopButton />
+      <BackToTopBtn />
     </div>
   );
 };
