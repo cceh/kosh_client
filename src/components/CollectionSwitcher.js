@@ -41,12 +41,8 @@ const CollectionSwitcher = () => {
         setAPIEndpoint("https://api.c-salt.uni-koeln.de");
         setCollectionBasePath("dicts");
         break;
-      case "localhost":
-        setAPIEndpoint("http://localhost:5000");
-        setCollectionBasePath("api");
-        break;
       default:
-        setAPIEndpoint("http://localhost:5000");
+        setAPIEndpoint("");
         setCollectionBasePath("api");
         break;
     }
