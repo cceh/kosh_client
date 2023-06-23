@@ -9,7 +9,7 @@ const stateStore = {
     "Kosh Data",
     "MPCD",
     "C-SALT Sanskrit",
-    "localhost",
+    // "localhost",
   ],
 
   search: {
