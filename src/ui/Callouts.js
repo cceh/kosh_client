@@ -3,14 +3,14 @@ export function NoResultsCallout() {
     <div
       key="no_entries"
       role="alert"
-      className="bg-yellow-100 rounded-lg py-2 px-4 text-yellow-700 m-3 w-full inline-flex items-center font-Helvetica"
+      className="bg-yellow-100 rounded-lg text-yellow-700 w-full inline-flex items-center"
     >
       <svg
         aria-hidden="true"
         focusable="false"
         data-prefix="fas"
         data-icon="exclamation-triangle"
-        className="w-4 h-4 mr-2"
+        className="w-6 h-6 m-2"
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 576 512"
@@ -30,10 +30,10 @@ export function EmptyQueryStringCallout() {
     <div
       key="type_search"
       role="alert"
-      className="bg-teal-100 rounded-lg py-2 px-4 text-teal-700 m-3 w-full inline-flex items-center font-Helvetica"
+      className="bg-teal-100 rounded-lg text-teal-700 w-full inline-flex items-center"
     >
       <svg
-        className="w-4 h-4 mr-2"
+        className="w-6 h-6 m-2"
         aria-hidden="true"
         focusable="false"
         data-prefix="fas"

@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { NoResultsCallout, EmptyQueryStringCallout } from "../ui/Callouts";
+import { useContext } from "react";
 import Context from "../data/Context";
+import { NoResultsCallout, EmptyQueryStringCallout } from "../ui/Callouts";
 import Spinner from "../ui/Spinner";
 import Table from "../ui/Table";
 import ToTopButton from "../ui/ToTopButton";
@@ -8,7 +8,6 @@ import ToTopButton from "../ui/ToTopButton";
 const ResultRender = () => {
   const { query_string, display_fields, loading, results } =
     useContext(Context);
-  const [scroll, setShowTopBtn] = useState(false);
 
   const available_fields = Object.keys(display_fields).filter(
     (key) => display_fields[key] === true
@@ -48,18 +47,12 @@ const ResultRender = () => {
       }
     });
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 600) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
-    });
-  });
-
   if (query_string === "") {
-    return <EmptyQueryStringCallout />;
+    return (
+      <div id="result-render-empty" className="flex flex-row mt-4 ml-[1rem] mr-[1rem]">
+        <EmptyQueryStringCallout />
+      </div>
+    );
   }
 
   if (
@@ -68,15 +61,19 @@ const ResultRender = () => {
       return results[key].length === 0;
     })
   ) {
-    return <NoResultsCallout />;
+    return (
+      <div id="result-render-no-results" className="flex flex-row mt-4 ml-[1rem] mr-[1rem]">
+        <NoResultsCallout />
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col">
+    <div id="result-render" className="flex flex-row mt-2">
+      <div className="flex flex-col w-full">
         {loading ? <Spinner /> : <ViewList />}
       </div>
-      <div className="flex flex-col">{scroll ? <ToTopButton /> : null}</div>
+      <ToTopButton />
     </div>
   );
 };

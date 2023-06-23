@@ -20,11 +20,11 @@
   }
 
   textarea {
-    @apply min-h-[80px] max-h-40 border-2 border-[#526B16] rounded pb-4 pr-5;
+    @apply min-h-[80px] max-h-40 border-2 border-[#526B16] rounded;
   }
 
   select {
-    @apply min-h-[30px] text-center border-2 border-[#526B16] rounded;
+    @apply min-h-[25px] text-center border-2 border-[#526B16] rounded;
   }
 
   .tooltip {
@@ -36,28 +36,14 @@
   }
 
   th {
-    @apply text-xs text-center p-1 border text-p-gray font-['Helvetica'];
+    @apply text-xs text-center p-1 border;
   }
 
   td {
-    @apply text-xs text-center p-1 border text-p-gray font-['Helvetica'];
-  }
-
-  td > i {
-    @apply p-0;
-  }
-
-  td > b {
-    @apply p-0;
-  }
-
-  li,
-  b,
-  i {
-    @apply lg:text-sm md:text-xs sm:text-xs text-xs text-justify;
+    @apply text-xs text-center p-1 border;
   }
 }
 
-* {
+body {
   font-family: "Helvetica", sans-serif;
 }

@@ -108,54 +108,52 @@ const QueryParams = () => {
   }, [loading, query_dicts, dict_fields, setDictFields, setDisplayFields]);
 
   return (
-    <div className="flex flex-row pt-2">
-      <div className="flex flex-col flex-wrap px-1 m-2">
-        <nav className="flex flex-row">
-          <CollectionSwitcher />
-          <CheckboxList
-            label="Dictionaries: "
-            items={dict_ids}
-            preselected={query_dicts}
-            onChange={selectDicts}
-          />
-        </nav>
-        <nav className="flex flex-row mt-4">
-          <Dropdown
-            label="Field: "
-            items={available_fields}
-            preselected={query_field}
-            onChange={selectField}
-          />
-          <Dropdown
-            label="Query Type: "
-            items={dict_types ? flatten(Object.values(dict_types)) : {}}
-            preselected={query_type}
-            onChange={selectQueryType}
-          />
-          <Dropdown
-            label="Query Size: "
-            items={query_sizes}
-            preselected={query_size}
-            onChange={selectQuerySize}
-          />
-        </nav>
-        <div className="flex flex-row mt-4">
-          <input
-            id="query"
-            name="query"
-            autoComplete="query"
-            type="text"
-            className="sticky outline outline-1 outline-slate-400 rounded focus:border-blue-500 focus:ring focus:outline-none"
-            placeholder="Search for..."
-            onChange={selectQuery}
-          />
-          <button
-            onClick={submitQuery}
-            className="ml-2 outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
-          >
-            Search
-          </button>
-        </div>
+    <div id="query-parameters" className="mx-4 mt-2">
+      <div className="flex flex-row">
+        <CollectionSwitcher />
+        <CheckboxList
+          label="Dictionaries: "
+          items={dict_ids}
+          preselected={query_dicts}
+          onChange={selectDicts}
+        />
+      </div>
+      <div className="flex flex-row mt-4">
+        <Dropdown
+          label="Field: "
+          items={available_fields}
+          preselected={query_field}
+          onChange={selectField}
+        />
+        <Dropdown
+          label="Query Type: "
+          items={dict_types ? flatten(Object.values(dict_types)) : {}}
+          preselected={query_type}
+          onChange={selectQueryType}
+        />
+        <Dropdown
+          label="Query Size: "
+          items={query_sizes}
+          preselected={query_size}
+          onChange={selectQuerySize}
+        />
+      </div>
+      <div className="flex flex-row mt-4">
+        <input
+          id="query"
+          name="query"
+          autoComplete="query"
+          type="text"
+          className="outline outline-1 outline-slate-400 rounded focus:border-blue-500 focus:ring focus:outline-none"
+          placeholder="Search for..."
+          onChange={selectQuery}
+        />
+        <button
+          onClick={submitQuery}
+          className="outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
+        >
+          Search
+        </button>
       </div>
     </div>
   );

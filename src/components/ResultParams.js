@@ -4,11 +4,7 @@ import Spinner from "../ui/Spinner";
 import CheckboxList from "../ui/CheckboxList";
 
 const ResultParams = () => {
-  const {
-    loading,
-    display_fields,
-    setDisplayFields,
-  } = useContext(Context);
+  const { loading, display_fields, setDisplayFields } = useContext(Context);
 
   const isChecked = () => {
     return Object.keys(display_fields).filter(
@@ -24,19 +20,17 @@ const ResultParams = () => {
   };
 
   return (
-    <div className="flex flex-row m-2 justify-between pb-2 flex-wrap">
-      <div className="flex flex-col">
-        {loading ? (
-          <Spinner />
-        ) : (
-          <CheckboxList
-            label="Display fields: "
-            items={Object.keys(display_fields)}
-            preselected={isChecked()}
-            onChange={selectDisplayFields}
-          />
-        )}
-      </div>
+    <div className="mx-4 mt-2">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <CheckboxList
+          label="Display fields: "
+          items={Object.keys(display_fields)}
+          preselected={isChecked()}
+          onChange={selectDisplayFields}
+        />
+      )}
     </div>
   );
 };

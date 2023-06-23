@@ -13,15 +13,15 @@ const CheckboxList = ({ label, items, preselected, onChange }) => {
         type="checkbox"
         defaultChecked={preselected.includes(item)}
         onChange={onChange}
-        className="cursor-pointer"
+        className="mx-2 cursor-pointer"
       />
-      <label className="m-1">{item}</label>
+      <label className="">{item}</label>
     </div>
   ));
 
   return (
-    <div className="flex flex-wrap">
-      <label className="mr-3">{label}</label>
+    <div className="flex flex-row flex-wrap max-w-full">
+      <label className="px-2">{label}</label>
       {checkboxList}
     </div>
   );
