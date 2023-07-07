@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import Context from "../data/Context";
-import { NoResultsCallout, EmptyQueryStringCallout } from "../ui/Callouts";
+import { NoResultsCallout, EmptyQueryStringCallout, NoDictSelectedCallout } from "../ui/Callouts";
 import Spinner from "../ui/Spinner";
 import Table from "../ui/Table";
 import BackToTopBtn from "../ui/BackToTopBtn";
 
-
 const ResultRender = () => {
-  const { query_string, display_fields, loading, results } =
+  const { query_string, query_dicts, display_fields, loading, results } =
     useContext(Context);
-
   const available_fields = Object.keys(display_fields).filter(
     (key) => display_fields[key] === true
   );
@@ -48,9 +46,23 @@ const ResultRender = () => {
       }
     });
 
+  if (query_dicts.length == 0) {
+    return (
+      <div
+        id="result-render-no-dicts"
+        className="flex flex-row mt-4 ml-[1rem] mr-[1rem]"
+      >
+        <NoDictSelectedCallout />
+      </div>
+    );
+  }
+
   if (query_string === "") {
     return (
-      <div id="result-render-empty" className="flex flex-row mt-4 ml-[1rem] mr-[1rem]">
+      <div
+        id="result-render-empty"
+        className="flex flex-row mt-4 ml-[1rem] mr-[1rem]"
+      >
         <EmptyQueryStringCallout />
       </div>
     );
@@ -63,7 +75,10 @@ const ResultRender = () => {
     })
   ) {
     return (
-      <div id="result-render-no-results" className="flex flex-row mt-4 ml-[1rem] mr-[1rem]">
+      <div
+        id="result-render-no-results"
+        className="flex flex-row mt-4 ml-[1rem] mr-[1rem]"
+      >
         <NoResultsCallout />
       </div>
     );
