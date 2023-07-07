@@ -9,6 +9,9 @@ const CollectionSwitcher = () => {
     setAPIEndpoint,
     setCollectionId,
     setCollectionBasePath,
+    setQueryField,
+    setQueryString,
+    setResults,
   } = useContext(Context);
   const default_api = "https://kosh.uni-koeln.de";
 
@@ -16,34 +19,45 @@ const CollectionSwitcher = () => {
     const uid = e.target.value;
     setCollectionId(uid);
 
+    document.getElementById("query").value = "";
+    setQueryString("");
+    setResults("");
+
     switch (uid) {
       case "CDSD":
         setAPIEndpoint(default_api);
         setCollectionBasePath("cdsd");
+        setQueryField("headword");
         break;
       case "Creole":
         setAPIEndpoint(default_api);
         setCollectionBasePath("creole");
+        setQueryField("lemma");
         break;
       case "Freedict":
         setAPIEndpoint(default_api);
         setCollectionBasePath("freedict");
+        setQueryField("headword");
         break;
       case "Kosh Data":
         setAPIEndpoint(default_api);
         setCollectionBasePath("api");
+        setQueryField("lemma");
         break;
       case "MPCD":
         setAPIEndpoint(default_api);
         setCollectionBasePath("mpcd");
+        setQueryField("trc");
         break;
       case "C-SALT Sanskrit":
         setAPIEndpoint("https://api.c-salt.uni-koeln.de");
         setCollectionBasePath("dicts");
+        setQueryField("headword_slp1");
         break;
       default:
         setAPIEndpoint("");
         setCollectionBasePath("api");
+        setQueryField("lemma");
         break;
     }
   };
