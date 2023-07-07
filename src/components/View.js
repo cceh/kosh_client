@@ -93,7 +93,13 @@ const View = () => {
 
       const dicts_by_name = Object.keys(dicts);
       setDictIds(dicts_by_name);
-      setQueryDicts(dicts_by_name.slice(0, 2));
+
+      if (collection_id != "Kosh Data") {
+        setQueryDicts(dicts_by_name.slice(0, 5));
+      } else {
+        setQueryDicts(["de_alcedo"]);
+      }
+
       setDictBaseURLs(
         Object.assign(...dicts_by_name.map((k, i) => ({ [k]: urls[i] })))
       );
@@ -102,7 +108,7 @@ const View = () => {
     };
 
     setSpec();
-  }, [kosh_api, collection_base_path, exclude]);
+  }, [kosh_api, collection_id, collection_base_path, exclude]);
 
   return (
     <Context.Provider value={value}>
@@ -124,7 +130,10 @@ const View = () => {
             </a>
           </div>
           <QueryParams />
-          <h5 id="result-heading" className="flex flex-row font-bold text-lg mx-4 mt-2">
+          <h5
+            id="result-heading"
+            className="flex flex-row font-bold text-lg mx-4 mt-2"
+          >
             Search Results
           </h5>
           <ResultParams />
