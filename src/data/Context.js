@@ -7,7 +7,7 @@ const stateStore = {
     "Creole",
     "Freedict",
     "Kosh Data",
-    "Pahlavi",
+    "MPCD Glossaries",
     "C-SALT Sanskrit",
     // "localhost",
   ],
