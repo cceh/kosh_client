@@ -36,6 +36,7 @@ const View = () => {
     state.results.display_fields
   );
   const [loading, setLoading] = useState(state.results.loading);
+  const  [submitting, setSubmitting] = useState(true)
   const [results, setResults] = useState(state.results.entries);
 
   const value = {
@@ -71,6 +72,8 @@ const View = () => {
     setDisplayFields,
     loading,
     setLoading,
+    submitting,
+    setSubmitting,
     results,
     setResults,
   };
@@ -94,7 +97,7 @@ const View = () => {
       const dicts_by_name = Object.keys(dicts);
       setDictIds(dicts_by_name);
 
-      if (collection_id != "Kosh Data") {
+      if (collection_id !== "Kosh Data") {
         setQueryDicts(dicts_by_name.slice(0, 5));
       } else {
         setQueryDicts(["de_alcedo"]);

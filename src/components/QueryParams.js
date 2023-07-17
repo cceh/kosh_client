@@ -30,6 +30,7 @@ const QueryParams = () => {
     setDisplayFields,
     setLoading,
     setResults,
+    setSubmitting,
   } = useContext(Context);
 
   const [available_fields, setAvailableFields] = useState({});
@@ -59,6 +60,7 @@ const QueryParams = () => {
   };
 
   const selectQuery = (e) => {
+    setSubmitting(true);
     if (e.target.value !== "") {
       setQueryString(e.target.value);
     } else {
@@ -69,9 +71,10 @@ const QueryParams = () => {
   const submitQuery = async (e) => {
     if (query_string !== "" && loading === false) {
       e.preventDefault();
-      e.stopPropagation()
-      
+      e.stopPropagation();
+
       setLoading(true);
+      setSubmitting(true);
 
       fetchResults(
         kosh_api,
@@ -86,6 +89,7 @@ const QueryParams = () => {
       );
 
       setLoading(false);
+      setSubmitting(false);
     }
   };
 

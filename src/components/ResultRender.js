@@ -1,52 +1,58 @@
 import { useContext } from "react";
 import Context from "../data/Context";
-import { NoResultsCallout, EmptyQueryStringCallout, NoDictSelectedCallout } from "../ui/Callouts";
+import {
+  NoResultsCallout,
+  EmptyQueryStringCallout,
+  NoDictSelectedCallout,
+} from "../ui/Callouts";
 import Spinner from "../ui/Spinner";
 import Table from "../ui/Table";
 import BackToTopBtn from "../ui/BackToTopBtn";
 
 const ResultRender = () => {
-  const { query_string, query_dicts, display_fields, loading, results } =
-    useContext(Context);
+  const {
+    query_string,
+    query_dicts,
+    display_fields,
+    loading,
+    submitting,
+    results,
+  } = useContext(Context);
+
   const available_fields = Object.keys(display_fields).filter(
     (key) => display_fields[key] === true
   );
 
-  const ViewList = () =>
-    Object.keys(results).map((key) => {
-      if (results[key].length) {
-        const isEmptyTable = results[key]
-          .map((result) => {
-            Object.keys(result).forEach(
-              (field) =>
-                (result[field] == null || result[field] === "NNN") &&
-                delete result[field]
-            );
+  const Tables = () =>
+    Object.entries(results).map(([dict, entries]) => {
+      const isEmptyTable = entries
+        .map((result) => {
+          Object.entries(result).forEach(
+            ([field, value]) =>
+              (!value || !value.length || value === "NNN") &&
+              delete result[field]
+          );
 
-            return available_fields.filter((field) =>
-              Object.keys(result).includes(field)
-            );
-          })
-          .every((entry) => entry.length === 0);
+          return available_fields.filter((field) =>
+            Object.keys(result).includes(field)
+          );
+        })
+        .every((entry) => entry.length === 0);
 
-        if (isEmptyTable) {
-          return null;
-        }
-
+      if (entries.length && !isEmptyTable) {
         return (
           <Table
-            key={"table_" + key}
-            label={key}
+            key={"table_" + dict}
+            label={dict}
             fields={available_fields}
-            items={results[key]}
+            items={entries}
           />
         );
-      } else {
-        return null;
       }
+      return null;
     });
 
-  if (query_dicts.length == 0) {
+  if (!query_dicts.length) {
     return (
       <div
         id="result-render-no-dicts"
@@ -57,7 +63,7 @@ const ResultRender = () => {
     );
   }
 
-  if (query_string === "") {
+  if (query_string === "" || submitting) {
     return (
       <div
         id="result-render-empty"
@@ -68,12 +74,7 @@ const ResultRender = () => {
     );
   }
 
-  if (
-    !results ||
-    Object.keys(results).every((key) => {
-      return results[key].length === 0;
-    })
-  ) {
+  if (!results || Object.values(results).every((entry) => !entry.length)) {
     return (
       <div
         id="result-render-no-results"
@@ -87,7 +88,7 @@ const ResultRender = () => {
   return (
     <div id="result-render" className="flex flex-row mt-2">
       <div className="flex flex-col w-full">
-        {loading ? <Spinner /> : <ViewList />}
+        {loading ? <Spinner /> : <Tables />}
       </div>
       <BackToTopBtn />
     </div>
