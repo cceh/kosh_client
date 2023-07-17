@@ -44,7 +44,7 @@ const CollectionSwitcher = () => {
         setCollectionBasePath("api");
         setQueryField("lemma");
         break;
-      case "MPCD":
+      case "Pahlavi":
         setAPIEndpoint(default_api);
         setCollectionBasePath("mpcd");
         setQueryField("trc");
