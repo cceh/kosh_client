@@ -61,14 +61,16 @@ const QueryParams = () => {
   const selectQuery = (e) => {
     if (e.target.value !== "") {
       setQueryString(e.target.value);
-      submitQuery();
     } else {
       setQueryString("");
     }
   };
 
-  const submitQuery = () => {
-    if (query_string !== "") {
+  const submitQuery = async (e) => {
+    if (query_string !== "" && loading === false) {
+      e.preventDefault();
+      e.stopPropagation()
+      
       setLoading(true);
 
       fetchResults(
@@ -139,21 +141,25 @@ const QueryParams = () => {
         />
       </div>
       <div className="flex flex-row mt-4">
-        <input
-          id="query"
-          name="query"
-          autoComplete="query"
-          type="text"
-          className="outline outline-1 outline-slate-400 rounded focus:border-blue-500 focus:ring focus:outline-none"
-          placeholder="Search for..."
-          onChange={selectQuery}
-        />
-        <button
-          onClick={submitQuery}
-          className="outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
-        >
-          Search
-        </button>
+        <form onSubmit={submitQuery}>
+          <input
+            id="query"
+            name="query"
+            value={query_string}
+            autoComplete="query"
+            type="text"
+            className="outline outline-1 outline-slate-400 rounded focus:border-blue-500 focus:ring focus:outline-none"
+            placeholder="Search for..."
+            onChange={selectQuery}
+            required
+          />
+          <button
+            type="submit"
+            className="outline outline-1 outline-green-600 text-green-600 rounded hover:text-white hover:bg-green-600 transition easy-in-out cursor-pointer"
+          >
+            Search
+          </button>
+        </form>
       </div>
     </div>
   );
