@@ -65,7 +65,7 @@ const ResultTable = ({ label, items, fields }) => {
 
     return (
       <tr
-        className="bg-white text-black text-base border-2 hover:bg-gray-200"
+        className="bg-white text-black text-base border-2 hover:bg-gray-100"
         key={"row_" + result["id"]}
       >
         {row}
