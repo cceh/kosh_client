@@ -15,13 +15,13 @@ const CheckboxList = ({ label, items, preselected, onChange }) => {
         onChange={onChange}
         className="mx-2 cursor-pointer"
       />
-      <label className="">{item}</label>
+      <label>{item}</label>
     </div>
   ));
 
   return (
     <div className="flex flex-row flex-wrap max-w-full">
-      <label className="px-2">{label}</label>
+      <label className="mr-2">{label}</label>
       {checkboxList}
     </div>
   );

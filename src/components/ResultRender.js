@@ -17,6 +17,7 @@ const ResultRender = () => {
     loading,
     submitting,
     results,
+    result_urls,
   } = useContext(Context);
 
   const available_fields = Object.keys(display_fields).filter(
@@ -25,6 +26,10 @@ const ResultRender = () => {
 
   const Tables = () =>
     Object.entries(results).map(([dict, entries]) => {
+      if (!entries) {
+        return null;
+      }
+
       const isEmptyTable = entries
         .map((result) => {
           Object.entries(result).forEach(
@@ -46,6 +51,7 @@ const ResultRender = () => {
             label={dict}
             fields={available_fields}
             items={entries}
+            url={result_urls[dict]}
           />
         );
       }
@@ -66,7 +72,7 @@ const ResultRender = () => {
   if (query_string === "" || submitting) {
     return (
       <div
-        id="result-render-empty"
+        id="result-render-empty-query"
         className="flex flex-row mt-4 ml-[1rem] mr-[1rem]"
       >
         <EmptyQueryStringCallout />

@@ -36,8 +36,9 @@ const View = () => {
     state.results.display_fields
   );
   const [loading, setLoading] = useState(state.results.loading);
-  const  [submitting, setSubmitting] = useState(true)
+  const [submitting, setSubmitting] = useState(true);
   const [results, setResults] = useState(state.results.entries);
+  const [result_urls, setResultURLs] = useState(state.results.urls);
 
   const value = {
     collection_ids,
@@ -76,6 +77,8 @@ const View = () => {
     setSubmitting,
     results,
     setResults,
+    result_urls,
+    setResultURLs,
   };
 
   useEffect(() => {

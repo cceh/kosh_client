@@ -7,7 +7,8 @@ export default function fetchResults(
   query_size,
   query_string,
   dict_specs,
-  setResults
+  setResults,
+  setResultURLs
 ) {
   const dicts = Object.values(query_dicts);
 
@@ -25,12 +26,22 @@ export default function fetchResults(
             ...prevResults,
             [dict]: entries,
           }));
+
+          setResultURLs((prevURLs) => ({
+            ...prevURLs,
+            [dict]: url,
+          }));
         })
         .catch((error) => console.error(error));
     } else {
       setResults((prevResults) => ({
         ...prevResults,
         [dict]: [],
+      }));
+
+      setResultURLs((prevURLs) => ({
+        ...prevURLs,
+        [dict]: "",
       }));
     }
   });

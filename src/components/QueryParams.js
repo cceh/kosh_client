@@ -31,6 +31,7 @@ const QueryParams = () => {
     setLoading,
     setResults,
     setSubmitting,
+    setResultURLs,
   } = useContext(Context);
 
   const [available_fields, setAvailableFields] = useState({});
@@ -85,7 +86,8 @@ const QueryParams = () => {
         query_size,
         query_string,
         dict_specs,
-        setResults
+        setResults,
+        setResultURLs
       );
 
       setLoading(false);
